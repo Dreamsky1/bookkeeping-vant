@@ -15,7 +15,7 @@
     <div class="xui-test">
       <div class="xui-center">测试之前的业务</div>
     </div>
-    <div class="xui-name">
+    <div class="xui-name" @click="onClickTest">
       <div class="xui-center">nice</div>
     </div>
   </div>
@@ -35,7 +35,6 @@ export default {
   },
 
   methods: {
-
   }
 }
 </script>
@@ -71,7 +70,7 @@ a {
   }
 }
 .xui-name{
-  margin-left: auto;
+  margin: 0 auto;
   @extend .xui-test;
 }
 </style>

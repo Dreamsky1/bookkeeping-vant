@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+//@function rpx($rpx) {
+//  @return $rpx / 750 * 100vw;
+//}
+
+@mixin flex($direction: row, $mainAxis: center, $secondAxis: center) {
+  // $mainAxis: 主轴[left, center, right, between, around]
+  // $secondAxis: 次轴[top, center, bottom, stretch, baseline]
+  display: flex;
+  flex-direction: $direction;
+  @if $mainAxis == left { justify-content: flex-start; }
+  @else if $mainAxis == center { justify-content: center }
+  @else if $mainAxis == between { justify-content: space-between }
+  @else if $mainAxis == around { justify-content: space-around}
+  @else { justify-content: flex-end; }
+
+  @if $secondAxis == top { align-items: flex-start; }
+  @else if $secondAxis == center { align-items: center; }
+  @else if $secondAxis == stretch { align-items: stretch; }
+  @else if $secondAxis == baseline { align-items: baseline; }
+  @else { align-items: flex-end}
+}
+
+@mixin text-nowrap($width) {
+  width: $width;/* 要显示文字的宽度 */
+  overflow: hidden; /* 超出的部分隐藏起来 */
+  white-space: nowrap;/* 不显示的地方用省略号...代替 */
+  text-overflow: ellipsis;/* 支持 IE */
+  -o-text-overflow: ellipsis;/* 支持 Opera */
+}
+
+@mixin center-transform() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}

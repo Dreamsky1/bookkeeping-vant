@@ -5,8 +5,8 @@
 //}
 
 @mixin flex($direction: row, $mainAxis: center, $secondAxis: center) {
-  // $mainAxis: 主轴[left, center, right, between, around]
-  // $secondAxis: 次轴[top, center, bottom, stretch, baseline]
+  // $mainAxis: 水平方向[left, center, right, between, around]
+  // $secondAxis: 垂直方向[top, center, bottom, stretch, baseline]
   display: flex;
   flex-direction: $direction;
   @if $mainAxis == left { justify-content: flex-start; }
@@ -23,11 +23,36 @@
 }
 
 @mixin text-nowrap($width) {
-  width: $width;/* 要显示文字的宽度 */
-  overflow: hidden; /* 超出的部分隐藏起来 */
-  white-space: nowrap;/* 不显示的地方用省略号...代替 */
+  width: $width; // 要显示文字的宽度
+  overflow: hidden; // 超出的部分隐藏起来
+  white-space: nowrap; // 不显示的地方用省略号...代替
   text-overflow: ellipsis;/* 支持 IE */
   -o-text-overflow: ellipsis;/* 支持 Opera */
+}
+
+@mixin text-nowrap-second() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-overflow: -o-ellipsis-lastline;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+@mixin triangle-bottom($length, $color) {
+  width: 0;
+  height: 0;
+  border-right: $length solid transparent;
+  border-left: $length solid transparent;
+  border-top: $length solid $color;
+}
+
+@mixin triangle-top($length) {
+  width: 0;
+  height: 0;
+  border-right: $length solid transparent;
+  border-left: $length solid transparent;
+  border-bottom: $length solid $color;
 }
 
 @mixin center-transform() {

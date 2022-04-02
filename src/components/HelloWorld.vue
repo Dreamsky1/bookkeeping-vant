@@ -13,7 +13,7 @@
     </ul>
     <h3>Essential Links</h3>
     <div class="xui-test">
-      <div class="xui-center">测试之前的业务</div>
+      <div class="xui-center" @click="onClickTo">测试之前的业务</div>
     </div>
     <div class="xui-name">
       <div class="xui-center" @click="onClickTestLogin">nice</div>
@@ -36,6 +36,11 @@ export default {
   },
 
   methods: {
+    onClickTo () {
+      this.$router.push({
+        path: '/home'
+      })
+    },
     async onClickTestLogin () {
       console.log('点击触发了')
       await TestSer.login('李白1', 1234)

@@ -23,6 +23,7 @@
     "postcss-px-to-viewport": "^1.1.1",
     "sass-loader": "^6.0.0",
     "style-loader": "^3.3.1",
+    "vant": "^2.12.47",
     "vue-router": "^3.5.3",
     "vue-template-compiler": "^2.6.11"
   },

@@ -2,14 +2,25 @@
 
 export const routers = [
   {
+    name: 'notFound',
     path: '/',
-    name: '首页',
-    component: () => import('../components/HelloWorld')
-    // component: () => import('../components/HelloWorld') 懒加载
+    redirect: {
+      name: 'home'
+    }
   },
   {
     path: '/home',
     name: 'home',
     component: () => import('../view/home/home')
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('../view/account/account')
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import('../view/user/user')
   }
 ]

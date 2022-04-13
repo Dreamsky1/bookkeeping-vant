@@ -1,12 +1,13 @@
 <template>
-  <div class="home-content">
-    首页
+  <div class="page-account">
+    这个是统计页面
     <bottom-tabbar/>
   </div>
 </template>
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
 export default {
+  name: 'Account',
   components: {
     BottomTabbar
   },
@@ -17,14 +18,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+
+  }
 }
 </script>
-<style lang="scss">
-.home-content{
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  font-size: 20px;
-}
+<style lang="scss" scoped>
+
 </style>

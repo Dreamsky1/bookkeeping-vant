@@ -64,7 +64,7 @@ export default {
   methods: {
     ...mapActions('login', ['login']),
     handleAbout () {
-      console.log('点击了', this.username)
+      console.log('点击了test', this.username)
       console.log('这个用户名称', this.users)
       this.visible = true
     }

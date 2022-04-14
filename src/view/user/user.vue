@@ -37,6 +37,7 @@
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
 import { Cell, CellGroup, Image } from 'vant';
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   name: 'me',
   components: {
@@ -52,9 +53,19 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      username: state => state.login.username
+    }),
+
+    ...mapGetters('user', ['users'])
+  },
+
   methods: {
+    ...mapActions('login', ['login']),
     handleAbout () {
-      console.log('点击了')
+      console.log('点击了', this.username)
+      console.log('这个用户名称', this.users)
       this.visible = true
     }
   }

@@ -10,7 +10,7 @@ class TestService {
       }
     })
 
-    localStorage.setItem('jwt', resp.data.token)
+    return resp.data
   }
 }
 let TestSer = new TestService();

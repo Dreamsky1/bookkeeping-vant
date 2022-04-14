@@ -32,7 +32,7 @@
     </van-cell-group>
 
     <!--使用动画库测试-->
-    <div class="animate__animated animate__heartBeat" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
+    <div class="animate__animated animate__heartBeat" v-if="visible">动画库的测试ok</div>
 
     <bottom-tabbar/>
   </div>

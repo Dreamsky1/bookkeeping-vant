@@ -31,6 +31,9 @@
       <van-cell icon="shop-o" title="关于账计" is-link value="V1.0.0" @click="handleAbout" />
     </van-cell-group>
 
+    <!--使用动画库测试-->
+    <div class="animate__animated animate__heartBeat" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
+
     <bottom-tabbar/>
   </div>
 </template>
@@ -66,7 +69,7 @@ export default {
     handleAbout () {
       console.log('点击了test', this.username)
       console.log('这个用户名称', this.users)
-      this.visible = true
+      this.visible = !this.visible
     }
   }
 }

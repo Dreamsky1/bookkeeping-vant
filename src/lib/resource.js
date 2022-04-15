@@ -11,7 +11,7 @@ const resource = {
       method: 'get',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config['data'] = param
     return request(config)
   },
 
@@ -22,8 +22,7 @@ const resource = {
       method: 'put',
       url: url
     }
-    if (param) config['param'] = param
-    console.log('输出这个config配置参数', config)
+    if (param) config['data'] = param
     return request(config)
   },
 
@@ -34,7 +33,7 @@ const resource = {
       method: 'post',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config['data'] = param
     return request(config)
   },
 
@@ -45,7 +44,7 @@ const resource = {
       method: 'delete',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config['data'] = param
     return request(config)
   }
 }

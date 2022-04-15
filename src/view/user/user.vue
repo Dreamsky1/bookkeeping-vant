@@ -71,10 +71,10 @@ export default {
       console.log('点击了test', this.username)
       console.log('这个用户名称', this.users)
       Toast('创建成功')
-      // this.visible = !this.visible
-      // this.$router.push({
-      //   path: '/login'
-      // })
+      this.visible = !this.visible
+      this.$router.push({
+        path: '/login'
+      })
       // this.login({
       //   username: 'test',
       //   password: 'test123456'

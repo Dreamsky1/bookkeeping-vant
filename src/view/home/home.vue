@@ -1,5 +1,5 @@
 <template>
-  <div class="home-content">
+  <div class="page-home-container ">
     首页
     <bottom-tabbar/>
   </div>
@@ -21,7 +21,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.home-content{
+.page-home-container {
   width: 100%;
   height: 100%;
   background-color: red;

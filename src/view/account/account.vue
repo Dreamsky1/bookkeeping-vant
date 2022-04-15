@@ -1,5 +1,5 @@
 <template>
-  <div class="page-account">
+  <div class="page-account-container ">
     这个是统计页面
     <bottom-tabbar/>
   </div>

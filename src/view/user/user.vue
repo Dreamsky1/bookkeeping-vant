@@ -1,5 +1,5 @@
 <template>
-  <div class="page page-tab-me">
+  <div class="page page-me-container ">
     <van-cell-group inset class="user-info-content">
       <div class="user-info">
         <van-image
@@ -9,7 +9,7 @@
             src="https://img01.yzcdn.cn/vant/cat.jpeg"
         />
         <div class="info-detail">
-          <div class="name">小熊</div>
+          <div class="name">{{ username }}</div>
           <div class="signature">个性签名：666</div>
         </div>
         <div class="integral">0分</div>
@@ -39,8 +39,9 @@
 </template>
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
-import { Cell, CellGroup, Image } from 'vant';
+import { Cell, CellGroup, Image, Toast } from 'vant';
 import { mapState, mapGetters, mapActions } from 'vuex'
+// import axios from "axios";
 export default {
   name: 'me',
   components: {
@@ -69,7 +70,19 @@ export default {
     handleAbout () {
       console.log('点击了test', this.username)
       console.log('这个用户名称', this.users)
-      this.visible = !this.visible
+      Toast('创建成功')
+      // this.visible = !this.visible
+      // this.$router.push({
+      //   path: '/login'
+      // })
+      // this.login({
+      //   username: 'test',
+      //   password: 'test123456'
+      // })
+      // axios.put('http://localhost:8080/api/login/login', {
+      //   username: 'test',
+      //   password: 'test123456'
+      // })
     }
   }
 }
@@ -77,15 +90,7 @@ export default {
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 
-.page{
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #f5f5f5;
-  width: 100%;
-  height: 100%;
-}
-.page-tab-me{
+.page-me-container {
   padding-top: 20px;
   .user-info-content{
     .user-info{

@@ -15,6 +15,7 @@ service.interceptors.request.use(config =>{
   // config.data = JSON.stringify(config.data) // 数据转化为json字符串格式
   config.data = qs.stringify(config.data) // 使用qs转化
 
+  console.log('发送请求拦截的', config)
   const token = localStorage.getItem("jwt")
   if (token) {
     config.headers['AUTHORIZATION'] = token // 每个请求携带自定义的 token
@@ -87,4 +88,6 @@ service.interceptors.response.use(response => {
   return Promise.resolve(error.response)
 })
 
-export default service;
+export {
+  service as request
+}

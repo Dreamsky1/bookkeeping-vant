@@ -1,4 +1,4 @@
-import request from "./request";
+import { request } from "./request";
 
 const defaultHost = '/api'
 
@@ -23,6 +23,7 @@ const resource = {
       url: url
     }
     if (param) config['param'] = param
+    console.log('输出这个config配置参数', config)
     return request(config)
   },
 

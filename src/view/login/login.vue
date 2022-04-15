@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { CellGroup, Form, Field, Button, Toast } from 'vant';
+import { CellGroup, Form, Field, Button, Notify } from 'vant';
 import { mapActions } from 'vuex'
 export default {
   name: 'Login',
@@ -56,7 +56,7 @@ export default {
       this.timer = setTimeout(async () => {
         try {
           await this.login(values)
-          Toast('登录成功')
+          Notify({ type: 'success', message: '通知内容' });
           this.$router.push({
             path: '/user'
           })

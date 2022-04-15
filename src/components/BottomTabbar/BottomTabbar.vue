@@ -1,7 +1,7 @@
 <template>
   <div class="component-bottom-tab">
     <van-tabbar route v-model="active">
-      <van-tabbar-item replace to="/home" icon="wap-home-o">首页</van-tabbar-item>
+      <van-tabbar-item replace to="/detail" icon="wap-home-o">明细</van-tabbar-item>
       <van-tabbar-item replace to="/account" icon="chart-trending-o">统计</van-tabbar-item>
       <van-tabbar-item replace to="/user" icon="contact">我的</van-tabbar-item>
     </van-tabbar>

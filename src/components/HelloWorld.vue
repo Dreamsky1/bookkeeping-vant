@@ -44,7 +44,7 @@ export default {
   methods: {
     onClickTo () {
       this.$router.push({
-        path: '/home'
+        path: '/detail'
       })
     },
     async onClickTestLogin () {

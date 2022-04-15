@@ -5,14 +5,14 @@ export const routers = [
     name: 'notFound',
     path: '/',
     redirect: {
-      name: 'home'
+      name: 'detail'
     }
   },
   {
     // 之后改成detail 明细页面
-    path: '/home',
-    name: 'home',
-    component: () => import('../view/home/home'),
+    path: '/detail',
+    name: 'detail',
+    component: () => import('../view/detail/detail'),
     meta: { title: '明细', isAuth: true }
   },
   {

@@ -14,9 +14,11 @@ router.beforeEach((to, from, next) => {
   if (localStorage.getItem('jwt') || !to.meta.isAuth) {
     next()
   } else {
-    next({
-      path: '/login'
-    })
+    // 本地登录测试
+    next()
+    // next({
+    //   path: '/login'
+    // })
   }
 })
 

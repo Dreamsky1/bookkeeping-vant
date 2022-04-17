@@ -34,12 +34,13 @@
     <!--使用动画库测试-->
     <div class="animate__animated animate__heartBeat" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
 
+    <van-calendar v-model="showCalendar" :show-confirm="false"/>
     <bottom-tabbar/>
   </div>
 </template>
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
-import { Cell, CellGroup, Image, Toast } from 'vant';
+import { Cell, CellGroup, Image, Toast, Calendar } from 'vant';
 import { mapState, mapGetters, mapActions } from 'vuex'
 // import axios from "axios";
 export default {
@@ -48,12 +49,14 @@ export default {
     BottomTabbar,
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
-    [Image.name]: Image
+    [Image.name]: Image,
+    [Calendar.name]: Calendar
   },
 
   data () {
     return {
-      visible: false
+      visible: false,
+      showCalendar: false
     }
   },
 
@@ -71,10 +74,11 @@ export default {
       console.log('点击了test', this.username)
       console.log('这个用户名称', this.users)
       Toast('创建成功')
-      this.visible = !this.visible
-      this.$router.push({
-        path: '/login'
-      })
+      this.showCalendar = true
+      // this.visible = !this.visible
+      // this.$router.push({
+      //   path: '/login'
+      // })
       // this.login({
       //   username: 'test',
       //   password: 'test123456'

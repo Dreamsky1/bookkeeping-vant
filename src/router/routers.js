@@ -1,5 +1,3 @@
-
-
 export const routers = [
   {
     name: 'notFound',
@@ -32,5 +30,11 @@ export const routers = [
     name: 'login',
     component: () => import('../view/login/login'),
     meta: { title: '登录', isAuth: false }
+  },
+  {
+    path: '/bill',
+    name: 'bill',
+    component: () => import('../view/bill'),
+    meta: { title: '账单详情', isAuth: true }
   }
 ]

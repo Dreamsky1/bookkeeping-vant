@@ -1,11 +1,13 @@
 <template>
-  <van-action-sheet class="component-category-picker" v-model="showCategoryPicker" title="标题">
+  <van-action-sheet class="component-bottom-tab" v-model="showCategoryPicker" title="请选择月份">
     <div class="content">
       <div class="all-category">全部分类</div>
-      <div class="expense">支出</div>
-      <div class="expense-categories">
-        <div v-for="(category, index) in flexCategories(categories)" :key="index" class="expense-category">
-          <div class="category">{{ category.name }}</div>
+      <div class="type-categories" v-for="i in 2" :key="i">
+        <div class="expense">支出</div>
+        <div class="expense-categories">
+          <div v-for="(category, index) in flexCategories(categories)" :key="index" class="expense-category">
+            <div class="category">{{ category.name }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -56,23 +58,28 @@ export default {
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 .component-category-picker{
-  .content {
-    padding: 20px 15px 20px 15px;
-    .all-category{
-      width: 90px;
-      height: 50px;
-      text-align: center;
-      line-height: 50px;
-      background-color: whitesmoke;
+}
+.content {
+  padding: 20px 15px 20px 15px;
+  .all-category{
+    width: 110px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: whitesmoke;
+  }
+  .type-categories{
+    .expense{
+      margin-top: 12px;
+      margin-bottom: 12px;
     }
     .expense-categories{
       @include flex(row, between);
       flex-wrap: wrap;
-      width: 90px;
-      height: 50px;
-      text-align: center;
-      line-height: 50px;
-      background-color: whitesmoke;
+      .expense-category{
+        @extend .all-category;
+        margin-bottom: 10px;
+      }
     }
   }
 }

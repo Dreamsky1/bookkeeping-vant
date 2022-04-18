@@ -4,7 +4,7 @@
       <van-button type="primary" size="mini" @click="handleSelectCategory">{{ category }} | <van-icon name="apps-o" /></van-button>
       <div class="date-info">
         <van-button type="primary" size="mini" @click="handleSelectMonth">2022年4月<van-icon name="arrow-down" /></van-button>
-        <div class="all-detail">总支出￥22 总收入￥223</div>
+        <div class="all-detail">总支出￥22 总入账￥223</div>
       </div>
     </div>
     <div class="day-bill-list" v-if="bills.length > 0">

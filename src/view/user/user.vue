@@ -69,12 +69,23 @@ export default {
   },
 
   methods: {
-    ...mapActions('login', ['login']),
-    handleAbout () {
-      console.log('点击了test', this.username)
-      console.log('这个用户名称', this.users)
+    ...mapActions('login', ['login', 'create', 'updateBill', 'getBill', 'createBill', 'test', 'createTypeCategory', 'getTypeCategory']),
+    async handleAbout () {
+      // console.log('点击了test', this.username)
+      // console.log('这个用户名称', this.users)
       Toast('创建成功')
-      this.showCalendar = true
+      // await this.updateBill()
+      // await this.getBill()
+      // await this.createBill()
+      await this.getTypeCategory()
+      // await this.createTypeCategory("收入")
+      // await this.create({
+      //   name: '杜甫',
+      //   createdBy: '杜甫',
+      //   states: 1
+      // })
+      // await this.test()
+      // this.showCalendar = true
       // this.visible = !this.visible
       // this.$router.push({
       //   path: '/login'
@@ -83,10 +94,7 @@ export default {
       //   username: 'test',
       //   password: 'test123456'
       // })
-      // axios.put('http://localhost:8080/api/login/login', {
-      //   username: 'test',
-      //   password: 'test123456'
-      // })
+      // axios.get('http://localhost:8080/api/category/categories?name=李白')
     }
   }
 }

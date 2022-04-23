@@ -15,7 +15,8 @@ service.interceptors.request.use(config =>{
   // console.log('config。data***', config.data)
   // config.data = JSON.stringify(config.data) // 数据转化为json字符串格式
   // config.data = qs.stringify(config.data) // 使用qs转化
-  // console.log('输出这个config', config)
+  // config.data = JSON.stringify(config.data)
+  console.log('输出这个config222', config)
   const token = localStorage.getItem("jwt")
   if (token) {
     config.headers['AUTHORIZATION'] = token // 每个请求携带自定义的 token

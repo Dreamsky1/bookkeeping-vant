@@ -28,6 +28,7 @@ import MonthPicker from "@/components/MonthPicker";
 import CategoryPicker from "@/components/CategoryPicker";
 import { AddBillModal, DayBillCard } from './components/index'
 import { Button, CellGroup, Icon, Empty, List } from 'vant';
+import { mapActions } from 'vuex'
 export default {
   components: {
     BottomTabbar,
@@ -55,7 +56,17 @@ export default {
     }
   },
 
+  async mounted () {
+    await this.init()
+  },
+
   methods: {
+    ...mapActions('category', ['getCategories']),
+
+    async init () {
+      await this.getCategories()
+    },
+
     handleAddBill () {
       this.$refs.addBillModal.show()
     },

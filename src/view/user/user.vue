@@ -9,8 +9,8 @@
             src="https://img01.yzcdn.cn/vant/cat.jpeg"
         />
         <div class="info-detail">
-          <div class="name">{{ username }}</div>
-          <div class="signature">个性签名：666</div>
+          <div class="name">{{ userInfo.username }}</div>
+          <div class="signature">个性签名：{{ userInfo.signature }}</div>
         </div>
         <div class="integral">0分</div>
       </div>
@@ -41,7 +41,7 @@
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
 import { Cell, CellGroup, Image, Toast, Calendar } from 'vant';
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 // import axios from "axios";
 export default {
   name: 'me',
@@ -62,39 +62,14 @@ export default {
 
   computed: {
     ...mapState({
-      username: state => state.login.username
+      userInfo: state => state.user.userInfo
     }),
-
-    ...mapGetters('user', ['users'])
   },
 
   methods: {
-    ...mapActions('login', ['login', 'create', 'updateBill', 'getBill', 'createBill', 'test', 'createTypeCategory', 'getTypeCategory']),
+    ...mapActions('user', ['login']),
     async handleAbout () {
-      // console.log('点击了test', this.username)
-      // console.log('这个用户名称', this.users)
       Toast('创建成功')
-      // await this.updateBill()
-      // await this.getBill()
-      // await this.createBill()
-      await this.getTypeCategory()
-      // await this.createTypeCategory("收入")
-      // await this.create({
-      //   name: '杜甫',
-      //   createdBy: '杜甫',
-      //   states: 1
-      // })
-      // await this.test()
-      // this.showCalendar = true
-      // this.visible = !this.visible
-      // this.$router.push({
-      //   path: '/login'
-      // })
-      // this.login({
-      //   username: 'test',
-      //   password: 'test123456'
-      // })
-      // axios.get('http://localhost:8080/api/category/categories?name=李白')
     }
   }
 }

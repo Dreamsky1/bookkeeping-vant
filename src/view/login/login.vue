@@ -48,7 +48,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('login', ['login']),
+    ...mapActions('user', ['login']),
 
     async handleSubmit (values) {
       this.isSubmit = true

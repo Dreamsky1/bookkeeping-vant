@@ -3,7 +3,7 @@
     <van-cell-group inset>
       <van-cell class="title">
         <template #title>
-          <span class="custom-title">4月16日 今天</span>
+          <span class="custom-title">{{ formatDate() }}</span>
         </template>
         <template #right-icon>
           <van-tag type="success" size="mini">出</van-tag>
@@ -46,12 +46,23 @@ export default {
     [Cell.name]: Cell
   },
 
+  props: {
+    bill: {
+      type: Object
+    }
+  },
+
   data () {
     return {
     }
   },
 
   methods: {
+    formatDate () {
+      const date = new Date(this.bill.created_on * 1000)
+      return date.getMonth() + 1 + '月' + date.getDate() + '日'
+    },
+
     handleClickBill (id) {
       console.log('输出这个id', id)
       this.$router.push({

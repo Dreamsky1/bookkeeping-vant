@@ -16,7 +16,7 @@ class CategoryService {
       data: {
         name: data.name,
         image: data.image,
-        typeId: data.typeId,
+        type_id: data.typeId,
         state: 1
       }
     })

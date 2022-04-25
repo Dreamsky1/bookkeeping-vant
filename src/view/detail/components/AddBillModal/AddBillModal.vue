@@ -2,8 +2,14 @@
   <van-action-sheet v-model="visible" title="账单">
     <div class="content">
       <div class="head-buttons">
-        <div :class="['expenses', activeType === 'expenses' ? 'active-expenses' : '']" @click="handleSelectType('expenses')">支出</div>
-        <div :class="['income', activeType === 'income' ? 'active-income' : '']" @click="handleSelectType('income')">收入</div>
+        <div v-for="(item, index) in categories" :key="index" @click="handleSelectType(item)">
+          <div v-if="item.name === '收入'"
+               :class="['expenses',
+               activeCategory.id === item.id ? 'active-expenses' : ''
+               ]">{{ item.name }}</div>
+          <div v-else :class="['income', activeCategory.id === item.id ? 'active-income' : '']">{{ item.name }}</div>
+        </div>
+
         <div class="time">
           <van-button type="default" size="small" @click="showCalendar = true">{{ date }}</van-button>
         </div>
@@ -14,7 +20,12 @@
       </div>
       <!-- 分类 -->
       <div class="select-category">
-
+        <div v-for="(secondCategory, index) in activeCategory.secondCategories" :key="index"
+             :class="['category', activeCategoryId === secondCategory.id ? 'selected' : '']"
+             @click="handleSelectCategory(secondCategory.id)"
+        >
+          {{ secondCategory.name }}
+        </div>
       </div>
 
       <div class="key-code">
@@ -35,7 +46,8 @@
   </van-action-sheet>
 </template>
 <script>
-import { ActionSheet, Button, Calendar, Field, NumberKeyboard  } from 'vant';
+import {ActionSheet, Button, Calendar, Field, Notify, NumberKeyboard} from 'vant';
+import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'AddBillModal',
   components: {
@@ -53,16 +65,42 @@ export default {
       date: this.localDate(),
       activeType: 'expenses',
       text: '',
-      keyboard: true
+      keyboard: true,
+      activeCategoryId: 0
     }
   },
 
+  computed: {
+    ...mapState({
+      categories: state => state.category.categories,
+      activeCategory: state => state.category.activeParentCategory
+    }),
+    ...mapGetters('category', ['filtersCategory'])
+  },
+
   methods: {
+    show() {
+      this.visible = true
+    },
+
+    close () {
+      this.text = ''
+      this.visible = false
+    },
+
+    ...mapMutations('category', ['updateActiveParentCategory']),
+    ...mapActions('bill', ['createBill']),
+
     cancel () {
       document.activeElement.blur()
     },
-    handleSelectType (type) {
-      this.activeType = type
+
+    handleSelectType (item) {
+      this.updateActiveParentCategory(item)
+    },
+
+    handleSelectCategory (id) {
+      this.activeCategoryId = id
     },
 
     onInput (key) {
@@ -73,8 +111,25 @@ export default {
       this.text = this.text.substr(0, this.text.length - 1)
     },
 
-    handleSubmit () {
-      console.log('这个还是尽快回国')
+    async handleSubmit () {
+      if (!this.text) {
+        Notify({ type: 'danger', message: '请输入金额' });
+        return
+      }
+      const data = {
+        type_id: this.activeCategory.id,
+        category_id: this.activeCategoryId,
+        amount: this.text * 100,
+        remark: '默认的'
+      }
+      try {
+        await this.createBill(data)
+        this.close()
+        Notify({ type: 'success', message: '创建成功' });
+      } catch (e) {
+        Notify({ type: 'danger', message: '创建失败' });
+      }
+      console.log('这个还是尽快回国', data)
     },
 
     localDate () {
@@ -86,14 +141,6 @@ export default {
 
     formatDate(date) {
       return `${date.getMonth() + 1}月${date.getDate()}日`;
-    },
-
-    show() {
-      this.visible = true
-    },
-
-    handleSelectTime () {
-
     },
 
     handleConfirm (date) {
@@ -152,7 +199,22 @@ export default {
   .select-category{
     width: 100%;
     height: 100px;
-    background-color: #A2E1D4;
+    //background-color: #A2E1D4;
+    // 超过可以滚动
+    @include flex(row, between);
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    .category{
+      width: 70px;
+      height: 40px;
+      font-size: 16px;
+      background-color: darkgray;
+      text-align: center;
+      line-height: 40px;
+      &.selected{
+        background-color: #3EB674;
+      }
+    }
   }
 }
 </style>

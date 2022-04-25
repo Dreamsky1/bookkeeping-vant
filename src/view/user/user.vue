@@ -12,19 +12,16 @@
           <div class="name">{{ userInfo.username }}</div>
           <div class="signature">个性签名：{{ userInfo.signature }}</div>
         </div>
-        <div class="integral">0分</div>
+        <div class="integral">{{ userInfo.integral }}分</div>
       </div>
     </van-cell-group>
 
     <van-cell-group inset class="more-info-content">
       <van-cell title="优惠服务" />
-      <div class="more-info">
-      </div>
+      <div class="more-info" v-if="false">敬请期待....</div>
     </van-cell-group>
 
     <van-cell-group inset>
-      <van-cell title="单元格" is-link value="内容" />
-      <van-cell icon="shop-o" title="单元格" is-link value="内容" />
       <van-cell icon="shop-o" title="预算管理" is-link value="内容" />
       <van-cell icon="shop-o" title="分类管理" is-link value="内容" />
       <van-cell icon="shop-o" title="反馈与建议" is-link value="内容" />
@@ -67,8 +64,13 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['login']),
+    ...mapActions('category', ['createCategory']),
     async handleAbout () {
+      await this.createCategory({
+        name: '奖金',
+        image: 'bonus',
+        typeId: 3
+      })
       Toast('创建成功')
     }
   }
@@ -89,6 +91,10 @@ export default {
       .info-detail{
         width: 208px;
         margin-left: 10px;
+        .signature{
+          font-size: 16px;
+          margin-top: 5px;
+        }
       }
     }
   }

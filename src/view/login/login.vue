@@ -56,7 +56,7 @@ export default {
       this.timer = setTimeout(async () => {
         try {
           await this.login(values)
-          Notify({ type: 'success', message: '通知内容' });
+          Notify({ type: 'success', message: '登录成功' });
           this.$router.push({
             path: '/user'
           })

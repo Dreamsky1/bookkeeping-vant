@@ -5,7 +5,8 @@ const user = {
   state: {
     userInfo: {
       username: 'test',
-      signature: '写个签名吧'
+      signature: '写个签名吧',
+      integral: 0
     }
   },
 

@@ -28,7 +28,7 @@ import MonthPicker from "@/components/MonthPicker";
 import CategoryPicker from "@/components/CategoryPicker";
 import { AddBillModal, DayBillCard } from './components/index'
 import { Button, CellGroup, Icon, Empty, List } from 'vant';
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   components: {
     BottomTabbar,
@@ -46,14 +46,13 @@ export default {
   data () {
     return {
       category: '全部分类',
-      bills: [{
-        title: '标题'
-      }, {
-        title: '广东省'
-      }, {
-        title: 'gds '
-      }]
     }
+  },
+
+  computed: {
+    ...mapState({
+      bills: state => state.bill.bills
+    })
   },
 
   async mounted () {
@@ -62,9 +61,11 @@ export default {
 
   methods: {
     ...mapActions('category', ['getCategories']),
+    ...mapActions('bill', ['getBills']),
 
     async init () {
       await this.getCategories()
+      await this.getBills()
     },
 
     handleAddBill () {

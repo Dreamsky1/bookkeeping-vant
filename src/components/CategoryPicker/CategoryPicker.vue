@@ -1,12 +1,17 @@
 <template>
   <van-action-sheet class="component-bottom-tab" v-model="showCategoryPicker" title="请选择月份">
     <div class="content">
-      <div class="all-category">全部分类</div>
-      <div class="type-categories" v-for="i in 2" :key="i">
-        <div class="expense">支出</div>
+      <div :class="['all-category', activeCategoryId === 0 ? 'selected' : '']"
+           @click="handleSelectCategory(0)">全部分类</div>
+      <div class="type-categories" v-for="(category, index) in categories" :key="index">
+        <div class="expense">{{ category.name }}</div>
         <div class="expense-categories">
-          <div v-for="(category, index) in flexCategories(categories)" :key="index" class="expense-category">
-            <div class="category">{{ category.name }}</div>
+          <div v-for="secondCategory in flexCategories(category.secondCategories)"
+               :key="secondCategory.id"
+               @click="handleSelectCategory(secondCategory.id)"
+               :class="['expense-category', activeCategoryId === secondCategory.id ? 'selected' : '']"
+          >
+            <div class="category">{{ secondCategory.name }}</div>
           </div>
         </div>
       </div>
@@ -16,6 +21,7 @@
 <script>
 import { ActionSheet, Button } from 'vant';
 // import util from '@/lib/util'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Login',
   components: {
@@ -26,26 +32,26 @@ export default {
   data () {
     return {
       showCategoryPicker: false,
-      categories: [
-        {
-          name: '交通'
-        },
-        {
-          name: '餐饮'
-        },
-        {
-          name: '教育'
-        },
-        {
-          name: '服饰'
-        },
-      ]
     }
   },
 
+  computed: {
+    ...mapState({
+      categories: state => state.category.categories,
+      activeCategoryId: state => state.category.activeCategoryId
+    }),
+    // ...mapGetters('category', ['flexCategories'])
+  },
+
   methods: {
+    ...mapMutations('category', ['updateActiveCategoryId']),
+
     show() {
       this.showCategoryPicker = true
+    },
+
+    handleSelectCategory (id) {
+      this.updateActiveCategoryId(id)
     },
 
     flexCategories (datas) {
@@ -67,6 +73,9 @@ export default {
     text-align: center;
     line-height: 50px;
     background-color: whitesmoke;
+    &.selected{
+      background-color: #42b983;
+    }
   }
   .type-categories{
     .expense{

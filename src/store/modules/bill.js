@@ -5,6 +5,7 @@ const bill = {
 
     state: {
         bills: [],
+        allBills: [],
         cBill: null
     },
 
@@ -14,9 +15,12 @@ const bill = {
             dispatch('getBills')
         },
 
-        async getBills ({ state }) {
+        async getBills ({ state, getters }) {
             const data = await BillService.getBills()
+            state.allBills = data.lists
             state.bills = data.lists
+            // 处理账单数据
+            getters.filtersBill
             console.log('输出或者', state.bills)
         }
     },

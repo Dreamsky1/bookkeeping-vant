@@ -63,6 +63,7 @@ export default {
       visible: false,
       showCalendar: false,
       date: this.localDate(),
+      sDate: new Date(),
       activeType: 'expenses',
       text: '',
       keyboard: true,
@@ -119,6 +120,7 @@ export default {
       const data = {
         type_id: this.activeCategory.id,
         category_id: this.activeCategoryId,
+        accounting_date: this.sDate.getTime(),
         amount: this.text * 100,
         remark: '默认的'
       }
@@ -129,7 +131,7 @@ export default {
       } catch (e) {
         Notify({ type: 'danger', message: '创建失败' });
       }
-      console.log('这个还是尽快回国', data)
+      console.log('emmmm....', data)
     },
 
     localDate () {
@@ -144,7 +146,10 @@ export default {
     },
 
     handleConfirm (date) {
+      console.log('输出这个date', date)
+      console.log('输出这个new Date', new Date())
       this.showCalendar = false
+      this.sDate = date
       this.date = this.formatDate(date);
     }
   }

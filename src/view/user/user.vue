@@ -69,7 +69,7 @@ export default {
       await this.createCategory({
         name: '奖金',
         image: 'bonus',
-        typeId: 3
+        typeId: 2
       })
       Toast('创建成功')
     }

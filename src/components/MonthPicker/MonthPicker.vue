@@ -52,7 +52,6 @@ export default {
           month: i + '月',
         })
       }
-      console.log('输出这个月', months)
       return util.flexDatas(months, 4)
     },
 

@@ -10,7 +10,7 @@
     <div class="day-bill-list" v-if="bills.length > 0">
       <day-bill-card v-for="(bill, index) in bills" :key="index" :bill="bill"></day-bill-card>
     </div>
-    <van-empty description="暂无数据" v-else/>
+    <van-empty class="empty" description="暂无数据" v-else/>
 
     <div class="add-bill-button">
       <van-button round type="primary" icon="records" @click="handleAddBill">计一笔</van-button>
@@ -113,6 +113,9 @@ export default {
     padding-top: 110px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .empty{
+    margin-top: 125px;
   }
 }
 </style>

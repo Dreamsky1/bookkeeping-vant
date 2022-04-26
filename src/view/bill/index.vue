@@ -15,10 +15,13 @@
             height="2rem"
             src="https://img01.yzcdn.cn/vant/cat.jpeg"
         />
-        <div class="category-title">交通<van-icon name="arrow" /></div>
+        <div class="category-title">{{ billInfo.category.name }}<van-icon name="arrow" /></div>
       </div>
-      <div class="bill-price">-299</div>
-      <div class="bill-time">记录时间：<span>2022年4月16日 16:14</span></div>
+      <div class="bill-price">
+        <span v-if="billInfo.type_id === 2">-</span>
+        <span v-else>+</span>
+        {{ billInfo.amount }}</div>
+      <div class="bill-time">记录时间：<span>{{ billInfo.date }}</span></div>
       <div class="bill-from">来源：手动记账</div>
       <div class="bill-actions">
         <van-button type="default" icon="delete-o" plain size="large">删除</van-button>
@@ -29,6 +32,7 @@
 </template>
 <script>
 import { Cell, CellGroup, Image, Button, Icon, NavBar } from 'vant';
+import { mapState } from 'vuex'
 export default {
   name: 'me',
   components: {
@@ -45,6 +49,15 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      billInfo: state => state.bill.billInfo
+    })
+  },
+
+  mounted () {
+    console.log('换个角度思考', this.billInfo)
+  },
   methods: {
 
   }

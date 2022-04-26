@@ -21,6 +21,7 @@
     "echarts": "^5.3.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "moment": "^2.29.3",
     "node-sass": "^7.0.1",
     "postcss-px-to-viewport": "^1.1.1",
     "sass-loader": "^6.0.0",

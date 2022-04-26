@@ -3,15 +3,16 @@
     <van-cell-group inset>
       <van-cell class="title">
         <template #title>
-          <span class="custom-title">{{ formatDate() }}</span>
+          <span class="custom-title">{{ bill.createTime }}</span>
         </template>
         <template #right-icon>
           <van-tag type="success" size="mini">出</van-tag>
-          <span style="margin-right: 10px;">8.00</span>
-          <van-tag type="warning" size="mini">入</van-tag>0.00
+          <span style="margin-right: 10px;">{{ expense }}</span>
+          <van-tag type="warning" size="mini">入</van-tag>
+          {{ income }}
         </template>
       </van-cell>
-      <van-cell v-for="i in 3" :key="i" @click="handleClickBill(i)">
+      <van-cell v-for="(item, index) in bill.bills" :key="index" @click="handleClickBill(item)">
         <template #title>
           <div class="bill-category">
             <van-image
@@ -21,13 +22,16 @@
                 src="https://img01.yzcdn.cn/vant/cat.jpeg"
             />
             <div class="category-time">
-              <div class="name">交通</div>
-              <div class="time">17:23</div>
+              <div class="name">{{ item.category.name }}</div>
+              <div class="time">{{ item.time }}</div>
             </div>
           </div>
         </template>
         <template #right-icon>
-          <span class="custom-right-price">-22</span>
+          <span class="custom-right-price">
+            <span v-if="item.type_id === 2">-</span>
+            <span v-else>+</span>
+            {{ item.amount }}</span>
         </template>
       </van-cell>
 
@@ -36,6 +40,7 @@
 </template>
 <script>
 import { CellGroup, Cell, Tag , Image, Button } from 'vant';
+import { mapMutations } from 'vuex'
 export default {
   name: 'Login',
   components: {
@@ -57,19 +62,41 @@ export default {
     }
   },
 
+  computed: {
+    expense () {
+      let allMoney = 0
+      this.bill.bills.forEach((item) => {
+        if (item.type_id === 2) {
+          allMoney = allMoney + item.amount
+        }
+      })
+
+      return allMoney.toFixed(2)
+    },
+
+    income () {
+      let allMoney = 0
+      this.bill.bills.forEach((item) => {
+        if (item.type_id === 3) {
+          allMoney = allMoney + item.amount
+        }
+      })
+
+      return allMoney.toFixed(2)
+    }
+  },
+
   methods: {
+    ...mapMutations('bill', ['activeBill']),
     formatDate () {
       const date = new Date(this.bill.created_on * 1000)
       return date.getMonth() + 1 + '月' + date.getDate() + '日'
     },
 
-    handleClickBill (id) {
-      console.log('输出这个id', id)
+    handleClickBill (item) {
+      this.activeBill(item)
       this.$router.push({
         path: '/bill',
-        query: {
-          id: id
-        }
       })
       // 这里只要传一个id过去之后，从vuex中去找就行getters中
     }

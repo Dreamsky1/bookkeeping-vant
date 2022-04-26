@@ -48,6 +48,7 @@
 <script>
 import {ActionSheet, Button, Calendar, Field, Notify, NumberKeyboard} from 'vant';
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
+import moment from "moment";
 export default {
   name: 'AddBillModal',
   components: {
@@ -117,10 +118,14 @@ export default {
         Notify({ type: 'danger', message: '请输入金额' });
         return
       }
+      if (this.activeCategoryId === 0) {
+        Notify({ type: 'danger', message: '请选择分类' });
+        return
+      }
       const data = {
         type_id: this.activeCategory.id,
         category_id: this.activeCategoryId,
-        accounting_date: this.sDate.getTime(),
+        accounting_date: moment(this.sDate).format("YYYY-MM-DD hh:mm:ss"),
         amount: this.text * 100,
         remark: '默认的'
       }
@@ -146,7 +151,7 @@ export default {
     },
 
     handleConfirm (date) {
-      console.log('输出这个date', date)
+      console.log('输出这个date', moment(date).format())
       console.log('输出这个new Date', new Date())
       this.showCalendar = false
       this.sDate = date

@@ -18,7 +18,15 @@ const bill = {
         },
 
         async getBills ({ state, getters }) {
-            const data = await BillService.getBills()
+            // 现在要查询的是一个月的
+            const currentMonth = new Date().getMonth() + 1
+            const currentYear = new Date().getFullYear()
+            const nextMonth = currentMonth + 1
+            // 2022-5-1 00:00:00
+            const time1 = currentYear + '-0' + currentMonth + '-' + '01' + ' 00:00:00'
+            const time2 = currentYear + '-0' + nextMonth + '-' + '01' + ' 00:00:00'
+            console.log('拼接在一起', time1, time2)
+            const data = await BillService.getBills(time1, time2)
             state.allBills = data.lists
             // 处理账单数据
             const day2bills = []

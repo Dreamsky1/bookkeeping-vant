@@ -17,8 +17,8 @@ const category = {
       const data = await CategoryService.getCategories()
       state.categories = data.lists
       state.activeParentCategory = state.categories[0]
-      const time = state.activeParentCategory.secondCategories[0].created_on
-      console.log('输出这个时间戳转为标准时间', new Date(time * 1000).getTime())
+      // const time = state.activeParentCategory.secondCategories[0].created_on
+      // console.log('输出这个时间戳转为标准时间', new Date(time * 1000).getTime())
     },
 
     async createCategory({ state }, data) {

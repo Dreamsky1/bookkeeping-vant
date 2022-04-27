@@ -10,10 +10,13 @@ class BillService{
         return resp
     }
 
-    async getBills() {
+    async getBills(time1, time2) {
         const resp = await Resource.get({
             resource: 'bill/bills',
-            data: {}
+            data: {
+                time1: time1,
+                time2: time2
+            }
         })
 
         return resp.data

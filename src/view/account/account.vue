@@ -9,7 +9,7 @@
     <!--当月每个分类下的消费额-->
     <month-structure></month-structure>
     <!--当月资产状态-->
-    <!--饼图-->
+    <!--饼图，分类消费-->
 <!--    <pie-chart></pie-chart>-->
     <month-picker ref="monthPicker"></month-picker>
     <bottom-tabbar/>

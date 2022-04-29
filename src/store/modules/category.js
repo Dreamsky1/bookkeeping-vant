@@ -45,8 +45,9 @@ const category = {
       state.activeCategoryId = id
     },
 
-    updateActiveParentCategory (state, item) {
-      state.activeParentCategory = item
+    updateActiveParentCategory (state, index) {
+      state.activeParentCategory = state.categories[index]
+      console.log('股东会撒娇', state.activeParentCategory)
     }
   }
 }

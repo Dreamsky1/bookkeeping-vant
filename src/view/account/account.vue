@@ -3,14 +3,14 @@
     <div class="account-head">
       <van-button type="primary" size="small" @click="handleSelectMonth">2022年4月<van-icon name="apps-o" /></van-button>
       <div class="expense-title">共支出</div>
-      <div class="expense-price">￥962</div>
-      <div class="income"><span>共收入</span><span>￥20.00</span></div>
+      <div class="expense-price">￥{{ monthExpense }}</div>
+      <div class="income"><span>共收入</span><span>￥{{ monthIncome }}</span></div>
     </div>
-    <!--当月每个分类下的消费额-->
+    <!--饼图，分类消费-->
+    <month-pie-chart></month-pie-chart>
+    <!--当月消费榜单-->
     <month-structure></month-structure>
     <!--当月资产状态-->
-    <!--饼图，分类消费-->
-<!--    <pie-chart></pie-chart>-->
     <month-picker ref="monthPicker"></month-picker>
     <bottom-tabbar/>
   </div>
@@ -18,9 +18,9 @@
 <script>
 import BottomTabbar from '@/components/BottomTabbar/BottomTabbar'
 import MonthPicker from "@/components/MonthPicker";
-import { MonthStructure } from './components'
+import { MonthStructure, MonthPieChart } from './components'
 import { Button, Icon, CellGroup } from 'vant';
-// import { PieChart } from '@/components/Charts'
+import { mapState } from 'vuex'
 export default {
   name: 'Account',
   components: {
@@ -29,13 +29,20 @@ export default {
     [CellGroup.name]: CellGroup,
     BottomTabbar,
     MonthPicker,
-    MonthStructure
-    // PieChart
+    MonthStructure,
+    MonthPieChart
   },
 
   data () {
     return {
     }
+  },
+
+  computed: {
+    ...mapState({
+      monthExpense: state => state.bill.monthExpense,
+      monthIncome: state => state.bill.monthIncome
+    })
   },
 
   mounted() {
@@ -51,6 +58,7 @@ export default {
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 .page-account-container{
+  padding-bottom: 50px;
   .account-head{
     padding-top: 15px;
     margin-bottom: 10px;

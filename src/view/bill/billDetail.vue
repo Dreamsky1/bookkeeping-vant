@@ -17,10 +17,7 @@
         />
         <div class="category-title">{{ billInfo.category.name }}<van-icon name="arrow" /></div>
       </div>
-      <div class="bill-price">
-        <span v-if="billInfo.type_id === 2">-</span>
-        <span v-else>+</span>
-        {{ billInfo.amount }}</div>
+      <div class="bill-price">{{ billInfo.amount }}</div>
       <div class="bill-time">记录时间：<span>{{ billInfo.date }}</span></div>
       <div class="bill-from">来源：手动记账</div>
       <div class="bill-actions">

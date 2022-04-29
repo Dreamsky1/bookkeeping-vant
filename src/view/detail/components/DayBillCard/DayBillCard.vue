@@ -28,10 +28,7 @@
           </div>
         </template>
         <template #right-icon>
-          <span class="custom-right-price">
-            <span v-if="item.type_id === 2">-</span>
-            <span v-else>+</span>
-            {{ item.amount }}</span>
+          <span class="custom-right-price">{{ item.amount }}</span>
         </template>
       </van-cell>
 
@@ -66,8 +63,8 @@ export default {
     expense () {
       let allMoney = 0
       this.bill.bills.forEach((item) => {
-        if (item.type_id === 2) {
-          allMoney = allMoney + item.amount
+        if (item.type_id === 1) {
+          allMoney = allMoney + item.amount * 1
         }
       })
 
@@ -77,8 +74,8 @@ export default {
     income () {
       let allMoney = 0
       this.bill.bills.forEach((item) => {
-        if (item.type_id === 3) {
-          allMoney = allMoney + item.amount
+        if (item.type_id === 2) {
+          allMoney = allMoney + item.amount * 1
         }
       })
 
@@ -96,7 +93,7 @@ export default {
     handleClickBill (item) {
       this.activeBill(item)
       this.$router.push({
-        path: '/bill',
+        path: '/bill_detail',
       })
       // 这里只要传一个id过去之后，从vuex中去找就行getters中
     }

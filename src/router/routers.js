@@ -32,9 +32,15 @@ export const routers = [
     meta: { title: '登录', isAuth: false }
   },
   {
+    path: '/bill_detail',
+    name: 'bill_detail',
+    component: () => import('../view/bill/billDetail'),
+    meta: { title: '账单详情', isAuth: true }
+  },
+  {
     path: '/bill',
     name: 'bill',
-    component: () => import('../view/bill'),
-    meta: { title: '账单详情', isAuth: true }
+    component: () => import('../view/bill/bill'),
+    meta: { title: '新增账单', isAuth: true }
   }
 ]

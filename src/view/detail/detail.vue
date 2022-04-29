@@ -3,8 +3,8 @@
     <div class="detail-head">
       <van-button type="primary" size="mini" @click="handleSelectCategory">{{ category }} | <van-icon name="apps-o" /></van-button>
       <div class="date-info">
-        <van-button type="primary" size="mini" @click="handleSelectMonth">2022年4月<van-icon name="arrow-down" /></van-button>
-        <div class="all-detail">总支出￥22 总入账￥223</div>
+        <van-button type="primary" size="mini" @click="handleSelectMonth">{{ year + '年' + month + '日' }}<van-icon name="arrow-down" /></van-button>
+        <div class="all-detail">总支出￥{{ monthExpense }} 总入账￥{{ monthIncome }}</div>
       </div>
     </div>
     <div class="day-bill-list" v-if="bills.length > 0">
@@ -18,7 +18,6 @@
 
     <month-picker ref="monthPicker"></month-picker>
     <category-picker ref="categoryPicker"></category-picker>
-    <add-bill-modal ref="addBillModal"></add-bill-modal>
     <bottom-tabbar/>
   </div>
 </template>
@@ -26,7 +25,7 @@
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
 import MonthPicker from "@/components/MonthPicker";
 import CategoryPicker from "@/components/CategoryPicker";
-import { AddBillModal, DayBillCard } from './components/index'
+import { DayBillCard } from './components/index'
 import { Button, CellGroup, Icon, Empty, List } from 'vant';
 import { mapActions, mapState } from 'vuex'
 export default {
@@ -37,7 +36,6 @@ export default {
     [Icon.name]: Icon,
     [Empty.name]: Empty,
     [List.name]: List,
-    AddBillModal,
     DayBillCard,
     MonthPicker,
     CategoryPicker
@@ -46,12 +44,16 @@ export default {
   data () {
     return {
       category: '全部分类',
+      year: new Date().getFullYear()
     }
   },
 
   computed: {
     ...mapState({
-      bills: state => state.bill.bills
+      bills: state => state.bill.bills,
+      monthExpense: state => state.bill.monthExpense,
+      monthIncome: state => state.bill.monthIncome,
+      month: state => state.bill.month
     })
   },
 
@@ -69,7 +71,10 @@ export default {
     },
 
     handleAddBill () {
-      this.$refs.addBillModal.show()
+      // this.$refs.addBillModal.show()
+      this.$router.push({
+        path: '/bill'
+      })
     },
 
     handleSelectMonth () {

@@ -12,7 +12,7 @@
           <div class="name">{{ userInfo.username }}</div>
           <div class="signature">个性签名：{{ userInfo.signature }}</div>
         </div>
-        <div class="integral">{{ userInfo.integral }}分</div>
+        <div class="integral" v-if="false">{{ userInfo.integral }}分</div>
       </div>
     </van-cell-group>
 
@@ -66,11 +66,13 @@ export default {
   methods: {
     ...mapActions('category', ['createCategory']),
     async handleAbout () {
-      await this.createCategory({
-        name: '奖金',
-        image: 'bonus',
-        typeId: 2
-      })
+      // await this.createCategory({
+      //   name: '奖金',
+      //   image: 'bonus',
+      //   typeId: 2
+      // }).then(resp => {
+      //   console.log('股东会撒娇', resp)
+      // })
       Toast('创建成功')
     }
   }

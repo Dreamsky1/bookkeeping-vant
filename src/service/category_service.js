@@ -2,12 +2,16 @@ import Resource from '../lib/resource'
 
 class CategoryService {
   async getCategories () {
-    const resp = await Resource.get({
-      resource: 'category/type/categories',
-      data: {}
-    })
+    try {
+      const resp = await Resource.get({
+        resource: 'category/type/categories',
+        data: {}
+      })
 
-    return resp.data
+      return resp.data
+    } catch (e) {
+      console.log('跟哥几个开裆裤')
+    }
   }
 
   async createCategory (data) {

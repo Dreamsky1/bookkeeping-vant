@@ -2,7 +2,7 @@
   <van-cell-group class="month-structure-component">
     <van-cell>
       <template #title>
-        <span class="custom-title">收支结构</span>
+        <span class="custom-title">支出排行</span>
       </template>
       <template #right-icon>
         <div class="tabs">
@@ -13,27 +13,29 @@
       </template>
     </van-cell>
 
-    <van-cell v-for="i in 3" :key="i">
+    <van-cell v-for="(item, index) in categoryId2bills" :key="index">
       <template #title>
         <div class="bill-category">
+          <span>{{ index + 1 }}</span>
           <van-image
               round
               width="2rem"
               height="2rem"
               src="https://img01.yzcdn.cn/vant/cat.jpeg"
           />
-          <div class="category-time">交通</div>
+          <div class="category-time">{{ item.category.name }}</div>
         </div>
 <!--        <van-progress :percentage="50" stroke-width="8" />-->
       </template>
       <template #right-icon>
-        <span class="custom-right-price">￥-22</span>
+        <span class="custom-right-price">{{ item.allMoney }}</span>
       </template>
     </van-cell>
   </van-cell-group>
 </template>
 <script>
 import { Button, Icon, CellGroup, Cell, Image, Progress } from 'vant';
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'MonthStructure',
   components: {
@@ -56,9 +58,34 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      activeParentCategory: state => state.category.activeParentCategory,
+      categoryId2bills: state => state.bill.categoryId2bills
+    })
+  },
+
+  mounted () {
+    this.initData()
+  },
+
   methods: {
+    ...mapMutations('bill', ['getBillsByCategory']),
     handleSelectTab (tab) {
       this.activeTab = tab.name
+      this.getBillsByCategory(this.activeParentCategory.secondCategories)
+    },
+
+    parsePrice (bills) {
+      let allMoney = 0
+      bills.forEach((item) => {
+        allMoney = allMoney + item.amount * 1
+      })
+      return allMoney
+    },
+
+    initData() {
+      this.getBillsByCategory(this.activeParentCategory.secondCategories)
     }
   }
 }

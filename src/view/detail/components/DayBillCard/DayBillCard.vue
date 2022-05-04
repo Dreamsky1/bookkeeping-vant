@@ -16,10 +16,9 @@
         <template #title>
           <div class="bill-category">
             <van-image
-                round
                 width="3rem"
                 height="3rem"
-                src="https://img01.yzcdn.cn/vant/cat.jpeg"
+                :src="`/${item.category.image}.png`"
             />
             <div class="category-time">
               <div class="name">{{ item.category.name }}</div>
@@ -100,6 +99,16 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.bill-category{
+  .van-image{
+    .van-image__img{
+      border-radius: 50%;
+      background-color: #9ADBB8;
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 .page-day-bill{

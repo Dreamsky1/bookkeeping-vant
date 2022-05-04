@@ -22,22 +22,19 @@
     </van-cell-group>
 
     <van-cell-group inset>
-      <van-cell icon="shop-o" title="预算管理" is-link value="内容" />
-      <van-cell icon="shop-o" title="分类管理" is-link value="内容" />
-      <van-cell icon="shop-o" title="反馈与建议" is-link value="内容" />
-      <van-cell icon="shop-o" title="关于账计" is-link value="V1.0.0" @click="handleAbout" />
+      <van-cell icon="gold-coin-o" title="预算管理" is-link @click="handleClick('budget')"/>
+      <van-cell icon="coupon-o" title="分类管理" is-link @click="handleClick('category')"/>
+      <van-cell icon="comment-o" title="反馈与建议" is-link  @click="handleClick('suggest')"/>
+      <van-cell icon="shop-o" title="关于账计" is-link value="V1.0.0" @click="handleClick('about')" />
     </van-cell-group>
-
     <!--使用动画库测试-->
-    <div class="animate__animated animate__heartBeat" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
-
-    <van-calendar v-model="showCalendar" :show-confirm="false"/>
+    <div class="animate__animated animate__bounceInLeft" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
     <bottom-tabbar/>
   </div>
 </template>
 <script>
 import BottomTabbar from '../../components/BottomTabbar/BottomTabbar'
-import { Cell, CellGroup, Image, Toast, Calendar } from 'vant';
+import { Cell, CellGroup, Image, Toast, Dialog } from 'vant';
 import { mapState, mapActions } from 'vuex'
 // import axios from "axios";
 export default {
@@ -47,13 +44,13 @@ export default {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
     [Image.name]: Image,
-    [Calendar.name]: Calendar
+    [Dialog.name]: Dialog
   },
 
   data () {
     return {
       visible: false,
-      showCalendar: false
+      show: false
     }
   },
 
@@ -65,7 +62,24 @@ export default {
 
   methods: {
     ...mapActions('category', ['createCategory']),
-    async handleAbout () {
+
+    async handleClick (type) {
+      if (type === 'about') {
+        Dialog.alert({
+          title: '微帐V1.0.0',
+          message: '<div>因为热爱，所以坚持</div><div>源码地址：https://github.com/Dreamsky1/bookkeeping-vant</div>'
+        })
+      } else if (type === 'suggest') {
+        this.$router.push({
+          path: '/suggest'
+        })
+      } else if (type === 'category') {
+        Toast('敬请期待')
+      } else if (type === 'budget') {
+        Toast('敬请期待')
+      }
+    },
+    // async handleAbout () {
       // await this.createCategory({
       //   name: '奖金',
       //   image: 'bonus',
@@ -73,8 +87,8 @@ export default {
       // }).then(resp => {
       //   console.log('股东会撒娇', resp)
       // })
-      Toast('创建成功')
-    }
+      // Toast('创建成功')
+    // }
   }
 }
 </script>

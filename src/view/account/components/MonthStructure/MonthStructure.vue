@@ -13,29 +13,31 @@
       </template>
     </van-cell>
 
-    <van-cell v-for="(item, index) in categoryId2bills" :key="index">
-      <template #title>
-        <div class="bill-category">
-          <span>{{ index + 1 }}</span>
-          <van-image
-              round
-              width="2rem"
-              height="2rem"
-              src="https://img01.yzcdn.cn/vant/cat.jpeg"
-          />
-          <div class="category-time">{{ item.category.name }}</div>
-        </div>
-<!--        <van-progress :percentage="50" stroke-width="8" />-->
-      </template>
-      <template #right-icon>
-        <span class="custom-right-price">{{ item.allMoney }}</span>
-      </template>
-    </van-cell>
+    <template v-if="categoryId2bills.length > 0">
+      <van-cell v-for="(item, index) in categoryId2bills" :key="index">
+        <template #title>
+          <div class="bill-category">
+            <span>{{ index + 1 }}</span>
+            <van-image
+                round
+                width="2rem"
+                height="2rem"
+                src="https://img01.yzcdn.cn/vant/cat.jpeg"
+            />
+            <div class="category-time">{{ item.category.name }}</div>
+          </div>
+          <!--        <van-progress :percentage="50" stroke-width="8" />-->
+        </template>
+        <template #right-icon>
+          <span class="custom-right-price">{{ item.allMoney }}</span>
+        </template>
+      </van-cell>
+    </template>
   </van-cell-group>
 </template>
 <script>
 import { Button, Icon, CellGroup, Cell, Image, Progress } from 'vant';
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'MonthStructure',
   components: {
@@ -62,7 +64,8 @@ export default {
     ...mapState({
       activeParentCategory: state => state.category.activeParentCategory,
       categoryId2bills: state => state.bill.categoryId2bills
-    })
+    }),
+    ...mapGetters('bill', ['sortBills'])
   },
 
   mounted () {
@@ -74,14 +77,6 @@ export default {
     handleSelectTab (tab) {
       this.activeTab = tab.name
       this.getBillsByCategory(this.activeParentCategory.secondCategories)
-    },
-
-    parsePrice (bills) {
-      let allMoney = 0
-      bills.forEach((item) => {
-        allMoney = allMoney + item.amount * 1
-      })
-      return allMoney
     },
 
     initData() {

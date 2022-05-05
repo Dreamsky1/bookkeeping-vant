@@ -42,5 +42,11 @@ export const routers = [
     name: 'bill',
     component: () => import('../view/bill/bill'),
     meta: { title: '新增账单', isAuth: true }
+  },
+  {
+    path: '/suggest',
+    name: 'suggest',
+    component: () => import('@/view/user/suggest'),
+    meta: { title: '反馈与建议', isAuth: true }
   }
 ]

@@ -22,13 +22,7 @@
            class="category"
            @click="handleSelectCategory(secondCategory.id)"
       >
-<!--        <van-image-->
-<!--            round-->
-<!--            width="3rem"-->
-<!--            height="3rem"-->
-<!--            src="https://img01.yzcdn.cn/vant/cat.jpeg"-->
-<!--        />-->
-        <img :class="['image-category', activeCategoryId === secondCategory.id ? 'selected' : '']" src="../../static/images/food.png"/>
+        <img :class="['image-category', activeCategoryId === secondCategory.id ? 'selected' : '']" :src="`/${secondCategory.image}.png`"/>
         <div style="font-size: 12px">{{ secondCategory.name }}</div>
       </div>
     </div>
@@ -137,7 +131,6 @@ export default {
 
     onDelete () {
       this.text = this.text.substr(0, this.text.length - 1)
-      console.log('手粗这', this.activeCategory)
     },
 
     async handleSubmit () {

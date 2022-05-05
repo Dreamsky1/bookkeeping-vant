@@ -1,5 +1,5 @@
 <template>
-  <van-action-sheet class="component-bottom-tab" v-model="showCategoryPicker" title="请选择月份">
+  <van-action-sheet class="component-bottom-tab" v-model="showCategoryPicker" title="请选择分类">
     <div class="content">
       <div :class="['all-category', activeCategoryId === 0 ? 'selected' : '']"
            @click="handleSelectCategory(0)">全部分类</div>
@@ -45,6 +45,7 @@ export default {
 
   methods: {
     ...mapMutations('category', ['updateActiveCategoryId']),
+    // ...mapMutations('bill', ['filtersBillsByCategoryId']),
 
     show() {
       this.showCategoryPicker = true
@@ -52,6 +53,7 @@ export default {
 
     handleSelectCategory (id) {
       this.updateActiveCategoryId(id)
+      // this.filtersBillsByCategoryId(id)
     },
 
     flexCategories (datas) {

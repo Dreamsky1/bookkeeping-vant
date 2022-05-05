@@ -20,6 +20,7 @@
 <script>
 import {ActionSheet, Button} from 'vant';
 import util from '@/lib/util'
+import { mapActions } from 'vuex'
 export default {
   name: 'MonthPicker',
   components: {
@@ -70,13 +71,15 @@ export default {
   },
 
   methods: {
+    ...mapActions('bill', ['getBills']),
     show() {
       this.showMonthPicker = true
     },
 
-    handleClickMonth (month) {
+    async handleClickMonth (month) {
       this.activeMonthId = month.id
       this.showMonthPicker = false
+      await this.getBills(month.month[0])
     }
   }
 }

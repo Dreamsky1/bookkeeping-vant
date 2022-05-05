@@ -1,13 +1,14 @@
 <template>
   <div class="daily-comparison">
-    七日内的对比柱状图
+    <bar></bar>
   </div>
 </template>
 <script>
+import { Bar } from '@/components/Charts'
 export default {
   name: 'DailyComparison',
   components: {
-
+    Bar
   },
   data () {
     return {

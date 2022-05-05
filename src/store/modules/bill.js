@@ -23,7 +23,10 @@ const bill = {
             dispatch('getBills')
         },
 
-        async getBills ({ state }) {
+        async getBills ({ state }, month) {
+            if (month) {
+                state.month = month
+            }
             state.monthExpense = 0
             state.monthIncome = 0
             const { startTime, endTime } = util.currentMonthRange(state.month)
@@ -113,6 +116,10 @@ const bill = {
                         name: category.name
                     })
                 }
+            })
+
+            categoryId2bills.sort((a, b) => {
+                return Math.abs(b.allMoney) - Math.abs(a.allMoney)
             })
 
             state.categoryId2bills = categoryId2bills

@@ -17,7 +17,7 @@
       <van-field v-model="text" label="金额" left-icon="warning-o" placeholder="0.00" clickable @focus="cancel" input-align="right"/>
     </div>
     <!-- 分类 -->
-    <div class="select-category">
+    <div class="select-category van-hairline--top van-hairline--bottom">
       <div v-for="(secondCategory, index) in activeCategory.secondCategories" :key="index"
            class="category"
            @click="handleSelectCategory(secondCategory.id)"
@@ -26,20 +26,16 @@
         <div style="font-size: 12px">{{ secondCategory.name }}</div>
       </div>
     </div>
-    <div class="bottom-remark">
-      <van-field
-          v-model="message"
-          autosize
-          label="备注"
-          maxlength="50"
-          placeholder="请输入备注"
-          class="input-remark"
-          input-align="right"
-      />
-      <div class="time">
-        <van-button type="default" size="small" @click="showCalendar = true">{{ date }}</van-button>
-      </div>
-    </div>
+    <van-field
+        v-model="message"
+        autosize
+        label="备注"
+        maxlength="50"
+        placeholder="请输入备注"
+        class="input-remark"
+        input-align="right"
+    />
+    <van-cell title="选择单个日期" :value="date" is-link @click="showCalendar = true" />
 
     <div class="key-code">
       <van-number-keyboard
@@ -54,11 +50,22 @@
       />
     </div>
 
-    <van-calendar v-model="showCalendar" :show-confirm="false" @confirm="handleConfirm" />
+    <van-popup v-model="showCalendar" position="bottom">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        title="选择日期"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @cancel="showCalendar = false"
+        @confirm="handleConfirm"
+    /></van-popup>
+
+<!--    <van-calendar v-model="showCalendar" :show-confirm="false" @confirm="handleConfirm" />-->
   </div>
 </template>
 <script>
-import {ActionSheet, Button, Calendar, Field, Notify, NumberKeyboard, Tabs, Tab, Image, NavBar} from 'vant';
+import {ActionSheet, Button, Calendar, Field, Notify, NumberKeyboard, Tabs, Tab, Popup, NavBar, DatetimePicker, Cell} from 'vant';
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 import moment from "moment";
 export default {
@@ -71,8 +78,10 @@ export default {
     [NumberKeyboard.name]: NumberKeyboard,
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
-    [Image.name]: Image,
-    [NavBar.name]: NavBar
+    [Popup.name]: Popup,
+    [NavBar.name]: NavBar,
+    [DatetimePicker.name]: DatetimePicker,
+    [Cell.name]: Cell
   },
 
   data () {
@@ -84,7 +93,10 @@ export default {
       text: '',
       keyboard: true,
       activeCategoryId: 0,
-      message: ''
+      message: '',
+      minDate: new Date(2020, 0, 1),
+      maxDate: new Date(2025, 10, 1),
+      currentDate: new Date(),
     }
   },
 
@@ -171,8 +183,6 @@ export default {
     },
 
     handleConfirm (date) {
-      console.log('输出这个date', moment(date).format())
-      console.log('输出这个new Date', new Date())
       this.showCalendar = false
       this.sDate = date
       this.date = this.formatDate(date);
@@ -183,21 +193,23 @@ export default {
 <style lang="scss">
 @import 'src/scss/mixins';
 .page-bill-content{
-  padding-top: 50px;
+  background-color: #FFFFFF !important;
   .van-tabs .van-tabs__wrap .van-tabs__nav{
     width: 250px;
     margin: 0 auto;
   }
+  .key-code .van-number-keyboard{
+    padding: 0;
+  }
   .head-buttons{
-    padding-top: 20px;
+    margin-top: 70px;
     .time{
       margin-left: auto;
     }
   }
   .input-amount{
-    margin-left: 20px;
     margin-top: 30px;
-    width: 90%;
+    width: 100%;
     //border-bottom: 1px solid;
     .van-cell--large{
       padding-left: 0;
@@ -208,13 +220,11 @@ export default {
     }
   }
   .select-category{
-    margin-left: 20px;
-    margin-top: 20px;
-    //background-color: #42b983;
-    width: 90%;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #FFFFFF;
     height: 150px;
-    //background-color: #A2E1D4;
-    // 超过可以滚动
     @include flex(row, between);
     align-items: flex-start;
     flex-wrap: wrap;
@@ -232,23 +242,8 @@ export default {
         border-radius: 50%;
         &.selected{
           background-color: #3EB674;
-          //border: 1px solid #42b983;
         }
       }
-    }
-  }
-
-  .bottom-remark{
-    @include flex(row, between);
-    .input-remark{
-      margin-left: 20px;
-      width: 75%;
-      height: auto;
-      margin-top: 10px;
-    }
-    .time{
-      height: 44px;
-      margin-right: 10px;
     }
   }
 }

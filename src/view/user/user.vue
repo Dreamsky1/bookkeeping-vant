@@ -23,6 +23,7 @@
 
     <van-cell-group inset>
       <van-cell icon="gold-coin-o" title="预算管理" is-link @click="handleClick('budget')"/>
+      <van-cell icon="gold-coin-o" title="个人中心" is-link @click="handleClick('userInfo')"/>
       <van-cell icon="coupon-o" title="分类管理" is-link @click="handleClick('category')"/>
       <van-cell icon="comment-o" title="反馈与建议" is-link  @click="handleClick('suggest')"/>
       <van-cell icon="shop-o" title="关于账计" is-link value="V1.0.0" @click="handleClick('about')" />
@@ -74,8 +75,14 @@ export default {
           path: '/suggest'
         })
       } else if (type === 'category') {
-        Toast('敬请期待')
+        this.$router.push({
+          path: '/category'
+        })
+        // this.show = true
+        // Toast('敬请期待')
       } else if (type === 'budget') {
+        Toast('敬请期待')
+      } else if (type === 'userInfo') {
         Toast('敬请期待')
       }
     },

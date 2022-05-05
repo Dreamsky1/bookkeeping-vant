@@ -97,14 +97,27 @@ export default {
   computed: {
     ...mapState({
       categories: state => state.category.categories,
-      activeCategory: state => state.category.activeParentCategory
+      activeCategory: state => state.category.activeParentCategory,
+      billInfo: state => state.bill.billInfo
     }),
     ...mapGetters('category', ['filtersCategory'])
+  },
+
+  mounted () {
+    const id = this.$route.query.id
+    this.init(id)
+    console.log('输出这billInfo', this.billInfo)
   },
 
   methods: {
     ...mapMutations('category', ['updateActiveParentCategory']),
     ...mapActions('bill', ['createBill']),
+
+    init (id) {
+      if (id) {
+        console.log('输出这id', id)
+      }
+    },
 
     cancel () {
       document.activeElement.blur()

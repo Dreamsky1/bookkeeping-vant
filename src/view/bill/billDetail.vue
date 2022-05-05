@@ -22,7 +22,7 @@
       <div class="bill-from">来源：手动记账</div>
       <div class="bill-actions">
         <van-button type="default" icon="delete-o" plain size="large">删除</van-button>
-        <van-button type="default" icon="edit" size="large">编辑</van-button>
+        <van-button type="default" icon="edit" size="large" @click="handleEditBill">编辑</van-button>
       </div>
     </van-cell-group>
   </div>
@@ -55,8 +55,16 @@ export default {
   mounted () {
     console.log('换个角度思考', this.billInfo)
   },
-  methods: {
 
+  methods: {
+    handleEditBill () {
+      this.$router.push({
+        path: '/bill',
+        query: {
+          id: this.billInfo.id
+        }
+      })
+    }
   }
 }
 </script>

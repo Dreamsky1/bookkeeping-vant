@@ -10,16 +10,16 @@ ps：这个项目比较简单，目前还需完善的，对vue全家桶的基本
 ## 🚀️[项目预览地址](www.baidu.com)
 
 ## 项目所用到的技术栈
-  1、Vue2.x
-  2、Vue-router3.x
-  3、Vuex3.x
-  4、Vant2
-  5、Axios库二次封装
-  6、Echarts
-  7、postcss-px-to-viewport（移动端适配）
-  8、Sass（css预处理）
-  9、Animate.css（动画库）
-  10、Moment.js
+  # 1、Vue2.x
+  # 2、Vue-router3.x
+  # 3、Vuex3.x
+  # 4、Vant2
+  # 5、Axios库二次封装
+  # 6、Echarts
+  # 7、postcss-px-to-viewport（移动端适配）
+  # 8、Sass（css预处理）
+  # 9、Animate.css（动画库）
+  # 10、Moment.js
 
 ## Project setup
 ```

@@ -5,16 +5,16 @@
         <span class="custom-title">支出排行</span>
       </template>
       <template #right-icon>
-        <div class="tabs">
+        <!--<div class="tabs">
           <div :class="['tab', tab.name === activeTab ? 'selected' : '']" @click="handleSelectTab(tab)" v-for="(tab, index) in tabs" :key="index">
             {{ tab.name }}
           </div>
-        </div>
+        </div>-->
       </template>
     </van-cell>
 
     <template v-if="categoryId2bills.length > 0">
-      <van-cell v-for="(item, index) in categoryId2bills" :key="index">
+      <van-cell v-for="(item, index) in categoryId2bills" :key="index" class="animate__animated animate__fadeInLeft" :style="{'animation-delay': `${200*index+200}ms`}">
         <template #title>
           <div class="bill-category">
             <span>{{ index + 1 }}</span>
@@ -22,7 +22,7 @@
                 round
                 width="2rem"
                 height="2rem"
-                src="https://img01.yzcdn.cn/vant/cat.jpeg"
+                :src="`/${item.category.image}.png`"
             />
             <div class="category-time">{{ item.category.name }}</div>
           </div>
@@ -37,7 +37,7 @@
 </template>
 <script>
 import { Button, Icon, CellGroup, Cell, Image, Progress } from 'vant';
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'MonthStructure',
   components: {
@@ -65,7 +65,6 @@ export default {
       activeParentCategory: state => state.category.activeParentCategory,
       categoryId2bills: state => state.bill.categoryId2bills
     }),
-    ...mapGetters('bill', ['sortBills'])
   },
 
   mounted () {
@@ -88,7 +87,6 @@ export default {
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 .month-structure-component{
-  //padding: 10px;
   .tabs{
     @include flex(row);
     .tab{
@@ -103,6 +101,9 @@ export default {
         background-color: #42b983;
       }
     }
+  }
+  .custom-title{
+    font-weight: 600;
   }
   .bill-category{
     @include flex(row,left);

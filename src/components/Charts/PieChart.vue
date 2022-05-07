@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       // 标准参数
-      option: {
+      defaultOption: {
         title: {
           text: '支出构成',
           left: 'center'
@@ -45,13 +45,18 @@ export default {
     })
   },
 
+  watch: {
+    pieData() {
+      // this.drawPieChart()
+    }
+  },
+
   mounted () {
     this.drawPieChart()
   },
 
   methods: {
     drawPieChart () {
-      this.option.series.data = this.pieData
       let myChart = echarts.init(document.getElementById('pieChart'))
       myChart.resize({
         height: 300,
@@ -68,6 +73,21 @@ export default {
             type: 'pie',
             radius: '50%',
             data: this.pieData,
+            color: [
+              '#37A2DA',
+              '#32C5E9',
+              '#67E0E3',
+              '#9FE6B8',
+              '#FFDB5C',
+              '#ff9f7f',
+              '#fb7293',
+              '#E062AE',
+              '#E690D1',
+              '#e7bcf3',
+              '#9d96f5',
+              '#8378EA',
+              '#96BFFF'
+            ],// 定制化颜色
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,

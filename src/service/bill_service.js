@@ -10,6 +10,15 @@ class BillService{
         return resp
     }
 
+    async updateBill(data) {
+        const resp = await Resource.post({
+            resource: 'bill/bill',
+            data: data
+        })
+
+        return resp
+    }
+
     async getBills(time1, time2) {
         const resp = await Resource.get({
             resource: 'bill/bills',
@@ -20,6 +29,17 @@ class BillService{
         })
 
         return resp.data
+    }
+
+    async deleteBill(id) {
+        const resp = await Resource.delete({
+            resource: 'bill/bill',
+            data: {
+                id: id
+            }
+        })
+
+        return resp
     }
 }
 let BillSer = new BillService();

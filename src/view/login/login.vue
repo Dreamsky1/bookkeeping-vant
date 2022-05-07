@@ -64,7 +64,6 @@ export default {
           console.error(e)
         }
       }, 1000)
-      console.log('输出这个values', values)
     }
   }
 }

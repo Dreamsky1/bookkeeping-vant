@@ -14,7 +14,7 @@
     </div>
     <!--金额-->
     <div class="input-amount">
-      <van-field v-model="text" label="金额" left-icon="warning-o" placeholder="0.00" clickable @focus="cancel" input-align="right"/>
+      <van-field v-model="amount" label="金额" left-icon="warning-o" placeholder="0.00" clickable @focus="cancel" input-align="right"/>
     </div>
     <!-- 分类 -->
     <div class="select-category van-hairline--top van-hairline--bottom">
@@ -26,6 +26,7 @@
         <div style="font-size: 12px">{{ secondCategory.name }}</div>
       </div>
     </div>
+    <!-- 备注 -->
     <van-field
         v-model="message"
         autosize
@@ -35,8 +36,8 @@
         class="input-remark"
         input-align="right"
     />
+    <!--日期-->
     <van-cell title="选择单个日期" :value="date" is-link @click="showCalendar = true" />
-
     <div class="key-code">
       <van-number-keyboard
           :show="keyboard"
@@ -49,7 +50,7 @@
           @close="handleSubmit"
       />
     </div>
-
+    <!--选择日期-->
     <van-popup v-model="showCalendar" position="bottom">
       <van-datetime-picker
         v-model="currentDate"
@@ -61,7 +62,6 @@
         @confirm="handleConfirm"
     /></van-popup>
 
-<!--    <van-calendar v-model="showCalendar" :show-confirm="false" @confirm="handleConfirm" />-->
   </div>
 </template>
 <script>
@@ -90,21 +90,21 @@ export default {
       showCalendar: false,
       date: this.localDate(),
       sDate: new Date(),
-      text: '',
+      amount: '',
       keyboard: true,
       activeCategoryId: 0,
       message: '',
-      minDate: new Date(2020, 0, 1),
-      maxDate: new Date(2025, 10, 1),
+      minDate: new Date(2021, 5, 1),
+      maxDate: new Date(2022, 12, 1),
       currentDate: new Date(),
+      bill: null
     }
   },
 
   computed: {
     ...mapState({
       categories: state => state.category.categories,
-      activeCategory: state => state.category.activeParentCategory,
-      billInfo: state => state.bill.billInfo
+      activeCategory: state => state.category.activeParentCategory
     }),
     ...mapGetters('category', ['filtersCategory'])
   },
@@ -112,16 +112,21 @@ export default {
   mounted () {
     const id = this.$route.query.id
     this.init(id)
-    console.log('输出这billInfo', this.billInfo)
   },
 
   methods: {
     ...mapMutations('category', ['updateActiveParentCategory']),
-    ...mapActions('bill', ['createBill']),
+    ...mapActions('bill', ['createBill', 'filtersBill', 'updateBill']),
 
-    init (id) {
+    async init (id) {
       if (id) {
-        console.log('输出这id', id)
+        const bill = await this.filtersBill(id)
+        this.bill = bill
+        console.log('输出这id', id ,bill)
+        this.activeCategoryId = bill.category.id
+        this.amount = Math.abs(bill.amount * 1)
+        this.message = bill.remark
+        this.date = bill.accounting_date
       }
     },
 
@@ -138,15 +143,15 @@ export default {
     },
 
     onInput (key) {
-      this.text = this.text + key
+      this.amount = this.amount + key
     },
 
     onDelete () {
-      this.text = this.text.substr(0, this.text.length - 1)
+      this.amount = this.amount.substr(0, this.amount.length - 1)
     },
 
     async handleSubmit () {
-      if (!this.text) {
+      if (!this.amount) {
         Notify({ type: 'danger', message: '请输入金额' });
         return
       }
@@ -155,14 +160,20 @@ export default {
         return
       }
       const data = {
-        type_id: this.activeCategory.id,
         category_id: this.activeCategoryId,
         accounting_date: moment(this.sDate).format("YYYY-MM-DD hh:mm:ss"),
-        amount: this.text * 100,
-        remark: this.message
+        amount: this.amount * 100,
+        remark: this.message,
+        type_id: this.activeCategory.id
       }
       try {
-        await this.createBill(data)
+        if (!this.bill) {
+          await this.createBill(data)
+        } else {
+          data['id'] = this.bill.id
+          await this.updateBill(data)
+        }
+
         this.$router.back()
         Notify({ type: 'success', message: '创建成功' });
       } catch (e) {

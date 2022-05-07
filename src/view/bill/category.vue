@@ -50,7 +50,7 @@ export default {
         image: this.image,
         typeId: this.typeId
       })
-      console.log('这个', this.name, this.typeId)
+      // console.log('这个', this.name, this.typeId)
     }
   }
 }

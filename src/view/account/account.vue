@@ -12,7 +12,7 @@
       <!--近七日的消费-->
 <!--      <daily-comparison></daily-comparison>-->
       <!--当月消费榜单-->
-      <month-structure></month-structure>
+      <month-ranking></month-ranking>
       <!--当月资产状态-->
       <month-picker ref="monthPicker"></month-picker>
     </template>
@@ -26,7 +26,7 @@
 <script>
 import BottomTabbar from '@/components/BottomTabbar/BottomTabbar'
 import MonthPicker from "@/components/MonthPicker";
-import { MonthStructure, MonthPieChart } from './components'
+import { MonthRanking, MonthPieChart } from './components'
 import { Button, Icon, CellGroup, Empty } from 'vant';
 import { mapState } from 'vuex'
 export default {
@@ -38,7 +38,7 @@ export default {
     [Empty.name]: Empty,
     BottomTabbar,
     MonthPicker,
-    MonthStructure,
+    MonthRanking,
     MonthPieChart,
   },
 
@@ -70,7 +70,8 @@ export default {
 <style lang="scss" scoped>
 @import 'src/scss/mixins';
 .page-account-container{
-  padding-bottom: 50px;
+  padding-bottom: 100px;
+  background-color: #FFFFFF !important;
   .account-head{
     padding-top: 15px;
     margin-bottom: 10px;

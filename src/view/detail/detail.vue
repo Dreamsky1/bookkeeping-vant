@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="day-bill-list" v-if="bills.length > 0">
-      <day-bill-card class="animate__animated animate__bounceInLeft" v-for="(bill, index) in bills" :key="index" :bill="bill"></day-bill-card>
+      <day-bill-card class="animate__animated animate__bounceInLeft"  v-for="(bill, index) in bills" :key="index" :bill="bill" :style="{'animation-delay': `${200*index+200}ms`}"></day-bill-card>
     </div>
     <van-empty class="empty" description="暂无数据" v-else/>
 
@@ -71,7 +71,6 @@ export default {
     },
 
     handleAddBill () {
-      // this.$refs.addBillModal.show()
       this.$router.push({
         path: '/bill'
       })

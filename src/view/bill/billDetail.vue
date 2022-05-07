@@ -13,25 +13,25 @@
             round
             width="2rem"
             height="2rem"
-            src="https://img01.yzcdn.cn/vant/cat.jpeg"
+            :src="`/${billInfo.category.image}.png`"
         />
         <div class="category-title">{{ billInfo.category.name }}<van-icon name="arrow" /></div>
       </div>
       <div class="bill-price">{{ billInfo.amount }}</div>
       <div class="bill-time">记录时间：<span>{{ billInfo.date }}</span></div>
-      <div class="bill-from">来源：手动记账</div>
+      <div class="bill-from">备注：{{ billInfo.remark }}</div>
       <div class="bill-actions">
-        <van-button type="default" icon="delete-o" plain size="large">删除</van-button>
+        <van-button type="default" icon="delete-o" plain size="large" @click="handleDelete">删除</van-button>
         <van-button type="default" icon="edit" size="large" @click="handleEditBill">编辑</van-button>
       </div>
     </van-cell-group>
   </div>
 </template>
 <script>
-import { Cell, CellGroup, Image, Button, Icon, NavBar } from 'vant';
+import {Cell, CellGroup, Image, Button, Icon, NavBar, Toast} from 'vant';
 import { mapState } from 'vuex'
 export default {
-  name: 'me',
+  name: 'billDetail',
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
@@ -53,7 +53,6 @@ export default {
   },
 
   mounted () {
-    console.log('换个角度思考', this.billInfo)
   },
 
   methods: {
@@ -63,6 +62,13 @@ export default {
         query: {
           id: this.billInfo.id
         }
+      })
+    },
+
+    async handleDelete () {
+      await this.$store.dispatch('bill/deleteBill', this.billInfo.id).then(() => {
+        Toast.success('删除成功')
+        this.$router.back()
       })
     }
   }

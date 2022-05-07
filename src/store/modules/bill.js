@@ -23,6 +23,11 @@ const bill = {
             dispatch('getBills')
         },
 
+        async updateBill({ dispatch }, data) {
+          await BillService.updateBill(data)
+            dispatch('getBills')
+        },
+
         async getBills ({ state }, month) {
             if (month) {
                 state.month = month
@@ -73,17 +78,20 @@ const bill = {
                 }
             })
             state.bills = day2bills
-            // getters.filtersBill
-            console.log('输出或者', state.bills)
+            // console.log('输出或者', state.bills)
+        },
+
+        async deleteBill({ state }, id) {
+            state.id = id
+            await BillService.deleteBill(id)
+        },
+
+        async filtersBill({ state }, id) {
+            return state.allBills.find((item) => item.id === id * 1)
         }
     },
 
     getters: {
-        // 根据filter的参数去查询
-        // filtersBill(state, filters) {
-        //     console.log('输出', state.cBill, filters)
-        // }
-        // 把所有的分类下的bill统计出来
 
     },
 

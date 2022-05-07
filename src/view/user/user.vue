@@ -29,7 +29,7 @@
       <van-cell icon="shop-o" title="关于账计" is-link value="V1.0.0" @click="handleClick('about')" />
     </van-cell-group>
     <!--使用动画库测试-->
-    <div class="animate__animated animate__bounceInLeft" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>
+<!--    <div class="animate__animated animate__bounceInLeft" v-if="visible">这个是一个测试一下使用这个动画效果的animate</div>-->
     <bottom-tabbar/>
   </div>
 </template>
@@ -68,7 +68,11 @@ export default {
       if (type === 'about') {
         Dialog.alert({
           title: '微帐V1.0.0',
-          message: '<div>因为热爱，所以坚持</div><div>源码地址：https://github.com/Dreamsky1/bookkeeping-vant</div>'
+          message: '<div>因为热爱，所以坚持</div>' +
+              '<div>前端源码地址：https://github.com/Dreamsky1/bookkeeping-vant</div>' +
+              '<div>技术栈：Vue全家桶+Vant-Ui+Echarts+后端Go语言等基础应用</div>' +
+              '<div>后端源码地址：https://github.com/Dreamsky1/go-gin-luna</div>' +
+              '<div>联系我：742081415@qq.com</div>'
         })
       } else if (type === 'suggest') {
         this.$router.push({
@@ -78,24 +82,12 @@ export default {
         this.$router.push({
           path: '/category'
         })
-        // this.show = true
-        // Toast('敬请期待')
       } else if (type === 'budget') {
         Toast('敬请期待')
       } else if (type === 'userInfo') {
         Toast('敬请期待')
       }
-    },
-    // async handleAbout () {
-      // await this.createCategory({
-      //   name: '奖金',
-      //   image: 'bonus',
-      //   typeId: 2
-      // }).then(resp => {
-      //   console.log('股东会撒娇', resp)
-      // })
-      // Toast('创建成功')
-    // }
+    }
   }
 }
 </script>

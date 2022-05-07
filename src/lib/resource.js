@@ -34,7 +34,6 @@ const resource = {
       url: url
     }
     if (param) config['data'] = param
-    // console.log('输出这个config', config)
     return request(config)
   },
 
@@ -45,7 +44,7 @@ const resource = {
       method: 'delete',
       url: url
     }
-    if (param) config['data'] = param
+    if (param) config.url = url + '?' + param
     return request(config)
   }
 }

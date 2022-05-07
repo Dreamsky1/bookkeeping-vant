@@ -1,9 +1,4 @@
 # bookkeeping-vant
-![分类](https://user-images.githubusercontent.com/44437103/167247783-78938c8f-b4fa-4cb9-9e74-a2bf46a05755.png)
-![记一笔](https://user-images.githubusercontent.com/44437103/167247788-e4c13c47-6a86-4e81-81dc-bd86d6e5837c.png)
-![明细](https://user-images.githubusercontent.com/44437103/167247791-d3e4d939-b211-4b17-bc0c-c9ff77569ac8.png)
-![统计](https://user-images.githubusercontent.com/44437103/167247795-80306cfc-abb7-4524-981d-3f0dd216e0c1.png)
-![我的](https://user-images.githubusercontent.com/44437103/167247796-cd65193d-070b-4227-8c65-7fd79d134f03.png)
 
 ### 项目介绍
 bookkeeping-vant 是自己在工作之余、闲暇时间做的一个记账H5前端项目，基于Vue2.x + Vant2实现，包括，统计、详情、账单、我的等页面。
@@ -25,6 +20,21 @@ ps：这个项目比较简单，目前还需完善的，对vue全家桶的基本
    8、Sass（css预处理） <br>
    9、Animate.css（动画库） <br>
    10、Moment.js <br>
+   
+## 项目运行
+```
+npm install
+```
+```
+npm run serve
+```
+   
+## 基本预览
+![分类](https://user-images.githubusercontent.com/44437103/167247783-78938c8f-b4fa-4cb9-9e74-a2bf46a05755.png)
+![记一笔](https://user-images.githubusercontent.com/44437103/167247788-e4c13c47-6a86-4e81-81dc-bd86d6e5837c.png)
+![明细](https://user-images.githubusercontent.com/44437103/167247791-d3e4d939-b211-4b17-bc0c-c9ff77569ac8.png)
+![统计](https://user-images.githubusercontent.com/44437103/167247795-80306cfc-abb7-4524-981d-3f0dd216e0c1.png)
+![我的](https://user-images.githubusercontent.com/44437103/167247796-cd65193d-070b-4227-8c65-7fd79d134f03.png)
 
 ## Project setup
 ```
@@ -45,8 +55,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### 代理的配置使用vue.cli中来配置代理

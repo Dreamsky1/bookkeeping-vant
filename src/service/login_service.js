@@ -1,17 +1,26 @@
 import Resource from '../lib/resource'
 
-class TestService {
+class LoginService {
   async login (username, password) {
-    const resp = await Resource.put({
-      resource: 'login/login',
+    const resp = await Resource.post({
+      resource: 'login',
       data: {
         username: username,
         password: password
       }
     })
 
-    localStorage.setItem('jwt', resp.data.token)
+    return resp.data
+  }
+  async register (username, password) {
+    await Resource.put({
+      resource: 'register',
+      data: {
+        username: username,
+        password: password
+      }
+    })
   }
 }
-let TestSer = new TestService();
-export default TestSer;
+let LoginSer = new LoginService();
+export default LoginSer;

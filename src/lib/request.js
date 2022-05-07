@@ -1,5 +1,5 @@
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 
 /** 1.创建axios实例 **/
 const service = axios.create({
@@ -12,9 +12,6 @@ const service = axios.create({
 /*** 2.请求拦截器,发送请求前做一些处理，配置请求头、设置token等 ***/
 service.interceptors.request.use(config =>{
   // 发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
-  // config.data = JSON.stringify(config.data) // 数据转化为json字符串格式
-  config.data = qs.stringify(config.data) // 使用qs转化
-
   const token = localStorage.getItem("jwt")
   if (token) {
     config.headers['AUTHORIZATION'] = token // 每个请求携带自定义的 token
@@ -87,4 +84,6 @@ service.interceptors.response.use(response => {
   return Promise.resolve(error.response)
 })
 
-export default service;
+export {
+  service as request
+}

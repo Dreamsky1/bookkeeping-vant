@@ -18,15 +18,21 @@
     <div class="xui-name">
       <div class="xui-center" @click="onClickTestLogin">nice</div>
     </div>
+    <van-button type="primary">主要按钮</van-button>
   </div>
 </template>
 
 <script>
 import TestSer from "../service/login_service";
+import { Button } from 'vant'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+
+  components: {
+    [Button.name]: Button
   },
 
   data() {
@@ -38,7 +44,7 @@ export default {
   methods: {
     onClickTo () {
       this.$router.push({
-        path: '/home'
+        path: '/detail'
       })
     },
     async onClickTestLogin () {

@@ -1,5 +1,8 @@
 # bookkeeping-vant
 
+### 项目介绍
+bookkeeping-vant 是一个记账H5前端项目，基于Vue2.0 + Vant2实现，包括，统计、详情、账单、我的等页面。
+
 ## Project setup
 ```
 npm install

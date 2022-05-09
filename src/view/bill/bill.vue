@@ -164,7 +164,8 @@ export default {
         accounting_date: moment(this.sDate).format("YYYY-MM-DD hh:mm:ss"),
         amount: this.amount * 100,
         remark: this.message,
-        type_id: this.activeCategory.id
+        type_id: this.activeCategory.id,
+        user_id: localStorage.getItem('user_id')
       }
       try {
         if (!this.bill) {

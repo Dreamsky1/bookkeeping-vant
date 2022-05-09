@@ -61,6 +61,7 @@ export default {
             await this.register(values).then(() => {
               Notify({ type: 'success', message: '注册成功，去登陆吧' })
               this.currentMode = 'Login'
+              this.isSubmit = false
             }).catch((e) => {
               Notify({ type: 'danger', message: e.msg })
               this.isSubmit = false

@@ -80,9 +80,10 @@ export default {
           path: '/suggest'
         })
       } else if (type === 'category') {
-        this.$router.push({
-          path: '/category'
-        })
+        Toast('敬请期待')
+        // this.$router.push({
+        //   path: '/category'
+        // })
       } else if (type === 'budget') {
         Toast('敬请期待')
       } else if (type === 'userInfo') {

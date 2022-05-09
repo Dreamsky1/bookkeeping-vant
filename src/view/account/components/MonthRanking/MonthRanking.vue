@@ -39,7 +39,7 @@
 import { Button, Icon, CellGroup, Cell, Image, Progress } from 'vant';
 import { mapState, mapMutations } from 'vuex'
 export default {
-  name: 'MonthStructure',
+  name: 'MonthRanking',
   components: {
     [Button.name]: Button,
     [Icon.name]: Icon,

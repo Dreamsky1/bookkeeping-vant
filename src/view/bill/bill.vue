@@ -37,7 +37,7 @@
         input-align="right"
     />
     <!--日期-->
-    <van-cell title="选择单个日期" :value="date" is-link @click="showCalendar = true" />
+    <van-cell title="选择日期" :value="date" is-link @click="showCalendar = true" />
     <div class="key-code">
       <van-number-keyboard
           :show="keyboard"
@@ -69,7 +69,7 @@ import {ActionSheet, Button, Calendar, Field, Notify, NumberKeyboard, Tabs, Tab,
 import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 import moment from "moment";
 export default {
-  name: 'AddBillModal',
+  name: 'Bill',
   components: {
     [ActionSheet.name]: ActionSheet,
     [Button.name]: Button,

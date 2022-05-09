@@ -25,7 +25,7 @@
 <script>
 import { NavBar, Field, Button } from 'vant';
 export default {
-  name: 'suggest',
+  name: 'Suggest',
   components: {
     [NavBar.name]: NavBar,
     [Field.name]: Field,

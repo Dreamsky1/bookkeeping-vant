@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-//@function rpx($rpx) {
-//  @return $rpx / 750 * 100vw;
-//}
-
 @mixin flex($direction: row, $mainAxis: center, $secondAxis: center) {
   // $mainAxis: 水平方向[left, center, right, between, around]
   // $secondAxis: 垂直方向[top, center, bottom, stretch, baseline]

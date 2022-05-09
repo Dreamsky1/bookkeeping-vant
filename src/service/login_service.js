@@ -13,13 +13,14 @@ class LoginService {
     return resp.data
   }
   async register (username, password) {
-    await Resource.put({
+    const resp = await Resource.put({
       resource: 'register',
       data: {
         username: username,
         password: password
       }
     })
+    return resp
   }
 }
 let LoginSer = new LoginService();

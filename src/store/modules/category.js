@@ -9,7 +9,15 @@ const category = {
     activeCategoryId: 0,
     activeParentCategory: {
       secondCategories: []
-    }
+    },
+
+    categoryIds: [{
+      name: '支出',
+      id: 1
+    }, {
+      name: '收入',
+      id: 2
+    }] // 默认支出和收入的 ID分别是 1, 2
   },
 
   actions: {
@@ -17,8 +25,6 @@ const category = {
       const data = await CategoryService.getCategories()
       state.categories = data.lists
       state.activeParentCategory = state.categories[0]
-      // const time = state.activeParentCategory.secondCategories[0].created_on
-      // console.log('输出这个时间戳转为标准时间', new Date(time * 1000).getTime())
     },
 
     async createCategory({ state }, data) {

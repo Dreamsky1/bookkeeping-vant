@@ -11,13 +11,20 @@ const user = {
   },
 
   /**
-   * 进行请求的发送
+   *
    */
   actions: {
     async login({ state }, { username, password }) {
       const data = await LoginService.login(username, password)
       state.userInfo = data.user
       localStorage.setItem('jwt', data.token)
+      localStorage.setItem('user_id', data.user.id)
+      localStorage.setItem('username', data.user.username)
+    },
+
+    async register({ state }, { username, password }) {
+      state.userInfo.username = username
+      return await LoginService.register(username, password)
     }
   },
 

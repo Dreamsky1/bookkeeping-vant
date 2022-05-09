@@ -15,15 +15,21 @@
     "@vue/cli-plugin-babel": "~4.5.11",
     "@vue/cli-plugin-eslint": "~4.5.11",
     "@vue/cli-service": "~4.5.11",
+    "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "babel-eslint": "^10.1.0",
+    "echarts": "^5.3.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "moment": "^2.29.3",
     "node-sass": "^7.0.1",
+    "postcss-px-to-viewport": "^1.1.1",
     "sass-loader": "^6.0.0",
     "style-loader": "^3.3.1",
+    "vant": "^2.12.47",
     "vue-router": "^3.5.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.6.2"
   },
   "eslintConfig": {
     "root": true,

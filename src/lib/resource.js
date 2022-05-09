@@ -1,4 +1,4 @@
-import request from "./request";
+import { request } from "./request";
 
 const defaultHost = '/api'
 
@@ -11,7 +11,7 @@ const resource = {
       method: 'get',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config.url = url + '?' + param
     return request(config)
   },
 
@@ -22,7 +22,7 @@ const resource = {
       method: 'put',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config['data'] = param
     return request(config)
   },
 
@@ -33,7 +33,7 @@ const resource = {
       method: 'post',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config['data'] = param
     return request(config)
   },
 
@@ -44,7 +44,7 @@ const resource = {
       method: 'delete',
       url: url
     }
-    if (param) config['param'] = param
+    if (param) config.url = url + '?' + param
     return request(config)
   }
 }
@@ -55,7 +55,7 @@ let buildArgs = function(args) {
 
   if (mergedArgs) {
     Object.keys(mergedArgs).forEach((key) => {
-      argList.push(key + '=' +escape(mergedArgs[key]))
+      argList.push(key + '=' +encodeURIComponent(mergedArgs[key]))
     })
   }
 

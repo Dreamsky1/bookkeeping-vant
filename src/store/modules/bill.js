@@ -132,7 +132,6 @@ const bill = {
 
             state.categoryId2bills = categoryId2bills
             state.pieData = pieData
-            console.log('测试个', state, categoryId2bills)
         }
     }
 }

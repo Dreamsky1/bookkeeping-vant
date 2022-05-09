@@ -48,8 +48,6 @@ export default {
       })
     },
     async onClickTestLogin () {
-      console.log('点击触发了')
-      await TestSer.login('李白1', 1234)
     }
   }
 }

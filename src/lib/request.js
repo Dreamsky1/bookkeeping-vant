@@ -12,15 +12,16 @@ const service = axios.create({
 /*** 2.请求拦截器,发送请求前做一些处理，配置请求头、设置token等 ***/
 service.interceptors.request.use(config =>{
   // 发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
+  // 配置请求头
+  config.headers = {
+    'content-type':'application/x-www-form-urlencoded' //配置请求头
+  }
+
   const token = localStorage.getItem("jwt")
   if (token) {
     config.headers['AUTHORIZATION'] = token // 每个请求携带自定义的 token
   }
 
-  // 配置请求头
-  config.headers = {
-    'content-type':'application/x-www-form-urlencoded' //配置请求头
-  }
 
   return config
 }, error => {
@@ -29,8 +30,12 @@ service.interceptors.request.use(config =>{
 
 /**** 3.响应拦截器 接收到响应数据并成功后的一些共有的处理，关闭loading等 ****/
 service.interceptors.response.use(response => {
-  return response.data
-}, error => {
+  if (response.data && response.data.code !== 200) {
+    return Promise.reject(response.data)
+  } else {
+    return response.data
+  }
+}, (error) => {
   /***** 接收到异常响应的处理开始 *****/
   if (error && error.response) {
     // 1.公共错误处理
@@ -41,13 +46,13 @@ service.interceptors.response.use(response => {
         break;
       case 401:
         error.message = '未授权，请重新登录'
+        localStorage.removeItem('jwt')
         break;
       case 403:
         error.message = '拒绝访问'
         break;
       case 404:
         error.message = '请求错误,未找到该资源'
-        window.location.href = "/NotFound"
         break;
       case 405:
         error.message = '请求方法未允许'
@@ -81,7 +86,7 @@ service.interceptors.response.use(response => {
   }
 
   /***** 处理结束 *****/
-  return Promise.resolve(error.response)
+  return Promise.reject(error.response.data)
 })
 
 export {

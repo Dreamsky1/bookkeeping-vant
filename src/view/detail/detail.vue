@@ -29,6 +29,7 @@ import { DayBillCard } from './components/index'
 import { Button, CellGroup, Icon, Empty, List } from 'vant';
 import { mapActions, mapState } from 'vuex'
 export default {
+  name: 'Detail',
   components: {
     BottomTabbar,
     [Button.name]: Button,

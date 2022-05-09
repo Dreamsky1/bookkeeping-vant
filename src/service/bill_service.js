@@ -23,6 +23,7 @@ class BillService{
         const resp = await Resource.get({
             resource: 'bill/bills',
             data: {
+                user_id: localStorage.getItem('user_id'),
                 time1: time1,
                 time2: time2
             }

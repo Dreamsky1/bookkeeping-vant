@@ -9,7 +9,7 @@
             src="https://img01.yzcdn.cn/vant/cat.jpeg"
         />
         <div class="info-detail">
-          <div class="name">{{ userInfo.username }}</div>
+          <div class="name">{{ username }}</div>
           <div class="signature">个性签名：{{ userInfo.signature }}</div>
         </div>
         <div class="integral" v-if="false">{{ userInfo.integral }}分</div>
@@ -39,7 +39,7 @@ import { Cell, CellGroup, Image, Toast, Dialog } from 'vant';
 import { mapState, mapActions } from 'vuex'
 // import axios from "axios";
 export default {
-  name: 'me',
+  name: 'User',
   components: {
     BottomTabbar,
     [Cell.name]: Cell,
@@ -51,7 +51,8 @@ export default {
   data () {
     return {
       visible: false,
-      show: false
+      show: false,
+      username: localStorage.getItem('username') || 'test'
     }
   },
 

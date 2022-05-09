@@ -38,7 +38,7 @@
 import { CellGroup, Cell, Tag , Image, Button } from 'vant';
 import { mapMutations } from 'vuex'
 export default {
-  name: 'Login',
+  name: 'DayBillCard',
   components: {
     [CellGroup.name]: CellGroup,
     [Tag .name]: Tag ,
@@ -94,7 +94,6 @@ export default {
       this.$router.push({
         path: '/bill_detail',
       })
-      // 这里只要传一个id过去之后，从vuex中去找就行getters中
     }
   }
 }

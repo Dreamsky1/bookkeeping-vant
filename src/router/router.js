@@ -15,10 +15,10 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     // 本地登录测试
-    next()
-    // next({
-    //   path: '/login'
-    // })
+    // next()
+    next({
+      path: '/login'
+    })
   }
 })
 

@@ -1,13 +1,11 @@
 export const routers = [
   {
-    name: 'notFound',
     path: '/',
     redirect: {
       name: 'detail'
     }
   },
   {
-    // 之后改成detail 明细页面
     path: '/detail',
     name: 'detail',
     component: () => import('../view/detail/detail'),

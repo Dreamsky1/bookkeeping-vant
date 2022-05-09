@@ -31,7 +31,7 @@
 import {Cell, CellGroup, Image, Button, Icon, NavBar, Toast} from 'vant';
 import { mapState } from 'vuex'
 export default {
-  name: 'billDetail',
+  name: 'BillDetail',
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,

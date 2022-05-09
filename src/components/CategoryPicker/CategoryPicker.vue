@@ -23,7 +23,7 @@ import { ActionSheet, Button } from 'vant';
 // import util from '@/lib/util'
 import { mapState, mapMutations } from 'vuex'
 export default {
-  name: 'Login',
+  name: 'CategoryPicker',
   components: {
     [ActionSheet.name]: ActionSheet,
     [Button.name]: Button

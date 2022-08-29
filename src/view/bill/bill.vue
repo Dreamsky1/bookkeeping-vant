@@ -122,7 +122,6 @@ export default {
       if (id) {
         const bill = await this.filtersBill(id)
         this.bill = bill
-        console.log('输出这id', id ,bill)
         this.activeCategoryId = bill.category.id
         this.amount = Math.abs(bill.amount * 1)
         this.message = bill.remark
